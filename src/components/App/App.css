@@ -1,3 +1,9 @@
+@import url('../../vendor/fonts/fonts.css');
+
 .page {
   text-align: center;
+  background-color: #202020;
+  color: #FFF;
+  font-family: 'Inter';
+  width: 100%;
 }

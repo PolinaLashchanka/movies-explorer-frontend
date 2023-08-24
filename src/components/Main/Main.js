@@ -1,7 +1,11 @@
+import Promo from "../Promo/Promo";
+
 function Main() {
-    return (
-        
-    );
+  return (
+    <main className="main">
+      <Promo />
+    </main>
+  );
 }
 
 export default Main;

@@ -1,6 +1,6 @@
-function Regicter() {
+function Register() {
     return (
-
+        <h1>register</h1>
     );
 }
 
