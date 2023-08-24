@@ -44,6 +44,7 @@
 .header__burger-link {
     font-size: 14px;
     line-height: 18px;
+    font-weight: 400;
 }
 
 .header__profile {

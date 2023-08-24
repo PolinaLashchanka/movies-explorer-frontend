@@ -49,13 +49,13 @@ function Header() {
           <div className={`header__burger-container ${active}`}></div>
           <div className={`header__link-container header__link-burger-container ${active}`}>
             <Link onClick={closeNav} to="/" className="header__link header__burger-link header__main-burger-link">Главная</Link>
-            <Link onClick={closeNav} to="/movies" className="header__link header__burger-link">
+            <Link onClick={closeNav} to="/movies" className="header__link header__burger-link" style={path === "/movies" ? {fontWeight: 500} : {}}>
               Фильмы
             </Link>
-            <Link onClick={closeNav} to="/saved-movies" className="header__link header__burger-link">
+            <Link onClick={closeNav} to="/saved-movies" className="header__link header__burger-link" style={path === "/saved-movies" ? {fontWeight: 500} : {}}>
               Сохраненные фильмы
             </Link>
-            <Link onClick={closeNav} to="/profile" className="header__link header__burger-link">
+            <Link onClick={closeNav} to="/profile" className="header__link header__burger-link" style={path === "/profile" ? {fontWeight: 500} : {}}>
               <div className="header__profile">
                 <p className="header__profile-text">Аккаунт</p>
                 <img
