@@ -82,10 +82,6 @@
         padding: 0 30px;
     }
 
-    .header__link {
-
-    }
-
     .header__main-burger-link {
         visibility: visible;
     }
@@ -147,11 +143,11 @@
         background-color: #FFF;
     }
 
-    .header__link:hover:before {
+    .header__burger-link:hover:before {
         width: 100%;
     }
 
-    .header__link::before {
+    .header__burger-link::before {
         transition: width 0.5s;
     }
 
