@@ -46,7 +46,7 @@ function Header() {
         path === "/profile") && (
         <header className="header">
           {logoLink}
-          <div className={`header__burger-container ${active}`}></div>
+          <div className={`header__burger-overlay ${active}`}></div>
           <div className={`header__link-container header__link-burger-container ${active}`}>
             <Link onClick={closeNav} to="/" className="header__link header__burger-link header__main-burger-link">Главная</Link>
             <Link onClick={closeNav} to="/movies" className="header__link header__burger-link" style={path === "/movies" ? {fontWeight: 500} : {}}>

@@ -1,0 +1,45 @@
+.form {
+    max-width: 1140px;
+    height: 72px;
+    border-radius: 8px;
+    border: 1.5px solid #AAA;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-top: 65px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.form::after {
+    content: '';
+    position: absolute;
+    top: 160px;
+    opacity: 0.2;
+    left: 0;
+    width: 100%;
+    border: 1px solid #AAA;
+}
+
+.form__input {
+    border: none;
+    outline: none;
+    vertical-align: middle;
+    width: 90%;
+    height: 100%;
+    background-color: inherit;
+    margin-left: 12px;
+    color: #8B8B8B;
+    font-size: 18px;
+}
+
+.form__button {
+    width: 100px;
+    height: 52px;
+    border-radius: 5px;
+    background: #4285F4;
+    border: none;
+    color: #FFF;
+    font-size: 14px;
+    cursor: pointer;
+}

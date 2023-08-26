@@ -50,6 +50,7 @@
 .header__profile {
     display: flex;
     align-items: center;
+    margin-left: 32px;
 }
 
 .header__profile-icon {
@@ -66,15 +67,18 @@
     display: none;
 }
 
-.header__burger-container {
+.header__burger-overlay {
     display: flex;
     visibility: hidden;
+}
+
+.header__link-burger-container {
+    gap: 20px;
 }
 
 .header__main-burger-link {
     visibility: hidden;
 }
-
 
 
 @media (max-width: 768px) {

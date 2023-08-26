@@ -1,6 +1,11 @@
+import "./Movies.css";
+import SearchForm from "../SearchForm/SearchForm";
+
 function Movies() {
     return (
-        <h1>text</h1>
+        <main className="movies">
+            <SearchForm />
+        </main>
     );
 }
 
