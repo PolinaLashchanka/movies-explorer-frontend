@@ -1,6 +1,13 @@
-function SavedMovies() {
+import "./SavedMovies.css";
+import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
+
+function SavedMovies({films}) {
     return (
-        <h1>text</h1>
+        <main className="movies">
+            <SearchForm />
+            <MoviesCardList films={films}/>
+        </main>
     );
 }
 

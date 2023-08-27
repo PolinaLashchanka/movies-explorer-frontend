@@ -12,5 +12,10 @@
       { "id": 10, "nameRU": "«Роллинг Стоунз» в изгнании5", "duration": 61, "url": "https://api.nomoreparties.co/uploads/stones_in_exile_b2f1b8f4b7.jpeg"},
       { "id": 11, "nameRU": "«Роллинг Стоунз» в изгнании", "duration": 61, "url": "https://api.nomoreparties.co/uploads/stones_in_exile_b2f1b8f4b7.jpeg"},
       { "id": 12, "nameRU": "«Роллинг Стоунз» в изгнании2", "duration": 61, "url": "https://api.nomoreparties.co/uploads/stones_in_exile_b2f1b8f4b7.jpeg"}
-  ]
+  ],
+  "saved-films": [
+      { "id": 1, "nameRU": "«Роллинг Стоунз» в изгнании", "duration": 61, "url": "https://api.nomoreparties.co/uploads/stones_in_exile_b2f1b8f4b7.jpeg"},
+      { "id": 2, "nameRU": "«Роллинг Стоунз» в изгнании2", "duration": 61, "url": "https://api.nomoreparties.co/uploads/all_tommoros_parties_33a125248d.jpeg"},
+      { "id": 3, "nameRU": "«Роллинг Стоунз» в изгнании3", "duration": 61, "url": "https://api.nomoreparties.co/uploads/stones_in_exile_b2f1b8f4b7.jpeg"}
+]
 }

@@ -1,19 +1,7 @@
-import { useState, useEffect } from "react";
-
 import "./MoviesCardList.css";
-import api from "../../utils/Api";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-function MoviesCardList() {
-  const [films, setFilms] = useState([]);
-
-  useEffect(() => {
-    api
-      .getFilms()
-      .then((films) => setFilms(films))
-      .catch((err) => console.log(err));
-  }, []);
-
+function MoviesCardList({films}) {
   return (
     <section className="movies-list">
       <div className="movies-list__container">
