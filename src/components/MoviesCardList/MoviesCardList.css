@@ -1,0 +1,21 @@
+.movies-list {
+    padding: 70px 0 80px;
+}
+
+.movies-list__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 30px;
+    row-gap: 32px;
+}
+
+.movies-list__button {
+    width: 100%;
+    height: 36px;
+    border-radius: 6px;
+    background: #2F2F2F;
+    border: none;
+    color: #FFF;
+    cursor: pointer;
+    margin-top: 60px;
+}

@@ -3,7 +3,7 @@
     padding: 70px 70px 75px;
     display: flex;
     justify-content: space-between;
-    align-items: start;
+    align-items: flex-start;
     gap: 50px;
 }
 

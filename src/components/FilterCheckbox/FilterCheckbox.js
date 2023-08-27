@@ -9,7 +9,6 @@ function FilterCheckbox() {
                 <span className="checkbox__text">Короткометражки</span>
             </label>
         </div>
-
     );
 }
 
