@@ -5,6 +5,7 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: 50px;
+    margin: 0 -70px;
 }
 
 .promo__text {

@@ -1,7 +1,17 @@
+import AuthorizationForm from "../AuthorizationForm/AuthorizationForm";
+
 function Login() {
-    return (
-        <h1>text</h1>
-    );
+  return (
+    <main className="authorization">
+      <AuthorizationForm
+        header={"Рады видеть!"}
+        buttonName={"Войти"}
+        formText={"Еще не зарегистированы?"}
+        path={"/signup"}
+        linkText={"Регистрация"}
+      />
+    </main>
+  );
 }
 
 export default Login;

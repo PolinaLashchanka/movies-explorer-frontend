@@ -3,14 +3,11 @@
     justify-content: space-between;
     padding: 0 70px;
     align-items: center;
+    height: 78px;
 }
 
 .header_main {
     background-color: #073042;
-}
-
-.header__logo {
-    margin: 18px 0;
 }
 
 .header__link-container {
@@ -77,6 +74,12 @@
 
 .header__main-burger-link {
     visibility: hidden;
+}
+
+.header_authorization {
+    width: 396px;
+    margin: 0 auto;
+    padding-top: 52px;
 }
 
 

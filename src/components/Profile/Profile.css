@@ -1,0 +1,85 @@
+.profile {
+    margin: 70px auto;
+}
+
+.profile__header {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 104px;
+}
+
+.profile__form {
+    display: flex;
+    flex-direction: column;
+    width: 410px;
+    margin: 0 auto;
+}
+
+.profile__form-input {
+    background: inherit;
+    height: 19px;
+    border: none;
+    text-align: right;
+    color: #FFF;
+    font-size: 11px;
+    margin-top: 16px;
+    position: relative;
+    cursor: default;
+    outline: none;
+}
+
+.profile__form-input_error {
+    height: 11px;
+    position: relative;
+}
+
+.profile__form-input_name::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
+    background-color: #424242;
+}
+
+.profile__form-input_name::before {
+    content: 'Имя';
+    position: absolute;
+    left: 0;
+    top: -18px;
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.profile__form-input_email::before {
+    content: 'E-mail';
+    position: absolute;
+    left: 0;
+    top: -18px;
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.profile__button {
+    background: inherit;
+    border: none;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.profile__edit-button {
+    color: #FFF;
+    margin: 205px 0 14px;
+}
+
+.profile__exit-button {
+    color: rgb(238, 52, 101);
+    font-weight: 500;
+}
+
+.profile__save-button {
+    margin-top: 207px;
+}

@@ -1,4 +1,4 @@
-.form {
+.search-form__form {
     max-width: 1140px;
     height: 72px;
     border-radius: 8px;
@@ -11,7 +11,7 @@
     position: relative;
 }
 
-.form::after {
+.search-form__form::after {
     content: '';
     position: absolute;
     top: 160px;
@@ -21,7 +21,7 @@
     border: 1px solid #AAA;
 }
 
-.form__input {
+.search-form__input {
     border: none;
     outline: none;
     vertical-align: middle;
@@ -33,7 +33,7 @@
     font-size: 18px;
 }
 
-.form__button {
+.search-form__button {
     width: 100px;
     height: 52px;
     border-radius: 5px;
