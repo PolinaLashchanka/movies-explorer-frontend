@@ -25,7 +25,7 @@ function Profile() {
         <span
           id="input-profile-edit-error"
           className="error profile__form-input_error profile__form-input_name"
-        ></span>
+        >Что-то пошло не так...</span>
         <input
           id="input-profile-edit"
           className="profile__form-input"
@@ -39,7 +39,7 @@ function Profile() {
         <span
           id="input-profile-edit-error"
           className="error profile__form-input_error profile__form-input_email"
-        ></span>
+        >Что-то пошло не так...</span>
         {!edit ? (
           <>
             <button

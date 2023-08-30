@@ -47,3 +47,15 @@
     margin-left: 14px;
     font-size: 13px;
 }
+
+@media (max-width: 320px) {
+    .checkbox {
+        margin: 30px 0 75px;
+    }
+
+    .checkbox__text {
+        margin-left: 14px;
+        font-size: 11px;
+        line-height: 18px;
+    }
+}

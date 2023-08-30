@@ -8,13 +8,10 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 function Header() {
   const location = useLocation();
   const path = location.pathname;
-  const logoImgClass = path.startsWith("/sign")
-    ? "header__logo_authorization"
-    : "";
 
   const logoLink = (
     <Link to="/">
-      <img className={`header__logo ${logoImgClass}`} src={logo} alt="logo" />
+      <img className="header__logo" src={logo} alt="логотип" />
     </Link>
   );
 
@@ -48,6 +45,7 @@ function Header() {
           {logoLink}
           <div className={`header__burger-overlay ${active}`}></div>
           <div className={`header__link-container header__link-burger-container ${active}`}>
+            <div className="heder__movie-link-container">
             <Link onClick={closeNav} to="/" className="header__link header__burger-link header__main-burger-link">Главная</Link>
             <Link onClick={closeNav} to="/movies" className="header__link header__burger-link" style={path === "/movies" ? {fontWeight: 500} : {}}>
               Фильмы
@@ -55,24 +53,25 @@ function Header() {
             <Link onClick={closeNav} to="/saved-movies" className="header__link header__burger-link" style={path === "/saved-movies" ? {fontWeight: 500} : {}}>
               Сохраненные фильмы
             </Link>
-            <Link onClick={closeNav} to="/profile" className="header__link header__burger-link" style={path === "/profile" ? {fontWeight: 500} : {}}>
+            </div>
               <div className="header__profile">
+            <Link onClick={closeNav} to="/profile" className="header__link header__burger-link" style={path === "/profile" ? {fontWeight: 500} : {}}>
                 <p className="header__profile-text">Аккаунт</p>
                 <img
                   className="header__profile-icon"
                   src={icon}
                   alt="profile icon"
                 />
-              </div>
             </Link>
+              </div>
           </div>
           <div onClick={closeNav} className="header__burger-btn">
-            {nav ? <AiOutlineClose size={27} />: <AiOutlineMenu size={35} />}
+            {nav ? <AiOutlineClose size={27} className="header__burger-btn_fixed" />: <AiOutlineMenu size={29} />}
           </div>
         </header>
       )}
       {(path === "/signup" || path === "/signin") && (
-        <header className="header header_authorization">{logoLink}</header>
+        <header className="header"></header>
       )}
     </>
   );

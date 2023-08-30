@@ -16,3 +16,14 @@
     height: 1px;
     background-color: #DADADA;
 }
+
+@media (max-width: 320px) {
+    .section__header {
+        font-size: 18px;
+        letter-spacing: -0.72px;
+    }
+    
+    .section__header::before {
+        bottom: -28px;
+    }
+}

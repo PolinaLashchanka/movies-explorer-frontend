@@ -1,14 +1,19 @@
 import { Link } from "react-router-dom";
+import logo from "../../images/logo.svg";
 import "./AuthorizationForm.css";
 
-function AuthorizationForm({header, buttonName, formText, path, linkText}) {
-
-  const hidden = `${path === '/signup' ? 'hidden' : ''}`;
+function AuthorizationForm({ header, buttonName, formText, path, linkText }) {
+  const hidden = `${path === "/signup" ? "hidden" : ""}`;
   return (
     <form className="form">
+      <Link to="/" className="form__logo">
+        <img src={logo} alt="логотип" />
+      </Link>
       <h2 className="form__header">{header}</h2>
       <div className="form__input-container">
-        <label for="authorization-name" className={`form__label ${hidden}`}>Имя</label>
+        <label for="authorization-name" className={`form__label ${hidden}`}>
+          Имя
+        </label>
         <input
           id="authorization-name"
           className={`form__input ${hidden}`}
@@ -21,8 +26,12 @@ function AuthorizationForm({header, buttonName, formText, path, linkText}) {
         <span
           id="authorization-name-error"
           className={`error form__input_error ${hidden}`}
-        >Что-то пошло не так...</span>
-        <label for="authorization-email" className="form__label">E-mail</label>
+        >
+          Что-то пошло не так...
+        </span>
+        <label for="authorization-email" className="form__label">
+          E-mail
+        </label>
         <input
           id="authorization-email"
           className="form__input"
@@ -33,8 +42,12 @@ function AuthorizationForm({header, buttonName, formText, path, linkText}) {
         <span
           id="authorization-email-error"
           className="error form__input_error"
-        >Что-то пошло не так...</span>
-        <label for="authorization-password" className="form__label">Пароль</label>
+        >
+          Что-то пошло не так...
+        </span>
+        <label for="authorization-password" className="form__label">
+          Пароль
+        </label>
         <input
           id="authorization-password"
           className="form__input"
@@ -47,10 +60,18 @@ function AuthorizationForm({header, buttonName, formText, path, linkText}) {
         <span
           id="iauthorization-password-error"
           className="error form__input_error"
-        >Что-то пошло не так...</span>
+        >
+          Что-то пошло не так...
+        </span>
       </div>
       <div className="form__button-container">
-        <button className={`button form__button ${path === '/signup' ? 'form__button_margin' : ''}`}>{buttonName}</button>
+        <button
+          className={`button form__button ${
+            path === "/signup" ? "form__button_margin" : ""
+          }`}
+        >
+          {buttonName}
+        </button>
         <p className="form__text">
           {formText}
           <span>

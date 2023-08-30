@@ -13,14 +13,13 @@ code {
 }
 
 .main {
-  margin: 0 70px;
   min-height: calc(100vh - 172px - 78px);
 }
 
 .authorization {
   display: flex;
   justify-content: center;
-  min-height: calc(100vh - 172px - 130px);
+  min-height: calc(100vh - 78px);
 }
 
 .error {
@@ -42,4 +41,10 @@ code {
   font-size: 14px;
   border: none;
   cursor: pointer;
+}
+
+@media (max-width: 320px) {
+  .main {
+    min-height: calc(100vh - 253px - 78px);
+  }
 }

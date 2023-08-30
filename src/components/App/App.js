@@ -10,6 +10,7 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Footer from "../Footer/Footer";
 import api from "../../utils/Api";
+import PageNotFound from "../PageNotFound/PageNotFound";
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Login />} />
+        <Route path="/*" element={<PageNotFound/>} />
       </Routes>
       <Footer />
     </div>

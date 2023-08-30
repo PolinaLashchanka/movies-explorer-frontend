@@ -1,4 +1,5 @@
 import "./Portfolio.css";
+import linkArrow from "../../images/arrow.svg";
 
 function Portfolio() {
   return (
@@ -6,18 +7,48 @@ function Portfolio() {
       <h2 className="portfolio__header">Портфолио</h2>
       <ul className="portfolio__links">
         <li className="portfolio__link portfolio__link-line">
-          <a className="portfolio__link-item " href="#">
-            Статичный сайт
+          <p className="portfolio__link-name">Статичный сайт</p>
+          <a
+            className="portfolio__link-item "
+            href="https://github.com/PolinaLashchanka/how-to-learn"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              src={linkArrow}
+              alt="ссылка на сайт ввиде стрелки"
+              className="portfolio__link-image"
+            />
           </a>
         </li>
         <li className="portfolio__link portfolio__link-line">
-          <a className="portfolio__link-item" href="#">
-            Адаптивный сайт
+          <p className="portfolio__link-name">Адаптивный сайт</p>
+          <a
+            className="portfolio__link-item "
+            href="https://github.com/PolinaLashchanka/how-to-learn"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              src={linkArrow}
+              alt="ссылка на сайт ввиде стрелки"
+              className="portfolio__link-image"
+            />
           </a>
         </li>
         <li className="portfolio__link">
-          <a className="portfolio__link-item" href="#">
-            Одностраничное приложение
+          <p className="portfolio__link-name">Одностраничное приложение</p>
+          <a
+            className="portfolio__link-item "
+            href="https://github.com/PolinaLashchanka/how-to-learn"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              src={linkArrow}
+              alt="ссылка на сайт ввиде стрелки"
+              className="portfolio__link-image"
+            />
           </a>
         </li>
       </ul>

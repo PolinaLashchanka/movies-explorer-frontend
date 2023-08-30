@@ -1,5 +1,5 @@
 .footer {
-    padding: 68px 70px 20px;
+    padding: 79px 70px 20px;
     height: 172px;
     box-sizing: border-box;
 }
@@ -45,4 +45,39 @@
 .footer__github {
     text-decoration: none;
     color: #FFF;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 79px 30px 20px;
+    }
+}
+
+@media (max-width: 320px) {
+    .footer {
+        padding: 79px 10px 20px;
+        height: 253px;
+    }
+
+    .footer__header::after {
+        bottom: -22px;
+    }
+
+    .footer__header {
+        font-size: 12px;
+        margin-top: 0;
+    }
+
+    .footer__info {
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .footer__yandex {
+        flex-direction: column;
+        font-size: 12px;
+        margin-top: 12px;
+        gap: 13px;
+    }
 }

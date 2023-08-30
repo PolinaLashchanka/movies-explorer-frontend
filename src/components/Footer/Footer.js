@@ -1,26 +1,34 @@
 import "./Footer.css";
+import { useLocation } from "react-router-dom";
 
 function Footer() {
+  const location = useLocation();
+  const path = location.pathname;
+
   return (
-    <footer className="footer">
-      <h2 className="footer__header">
-        Учебный проект Яндекс.Практикум х BeatFilm.
-      </h2>
-      <div className="footer__info">
-        <p className="footer__date">© 2023</p>
-        <div className="footer__yandex">
-          <p className="footer__text">Яндекс.Практикум</p>
-          <a
-            className="footer__github"
-            href="https://github.com/Yandex-Practicum"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Github
-          </a>
-        </div>
-      </div>
-    </footer>
+    <>
+      {(path === "/" || path === "/movies" || path === "/saved-movies") && (
+        <footer className="footer">
+          <h2 className="footer__header">
+            Учебный проект Яндекс.Практикум х BeatFilm.
+          </h2>
+          <div className="footer__info">
+            <p className="footer__date">© 2023</p>
+            <div className="footer__yandex">
+              <p className="footer__text">Яндекс.Практикум</p>
+              <a
+                className="footer__github"
+                href="https://github.com/Yandex-Practicum"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Github
+              </a>
+            </div>
+          </div>
+        </footer>
+      )}
+    </>
   );
 }
 
