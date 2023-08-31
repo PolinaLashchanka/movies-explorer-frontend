@@ -1,11 +1,82 @@
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import "./AuthorizationForm.css";
+import { useEffect, useState } from "react";
 
-function AuthorizationForm({ header, buttonName, formText, path, linkText }) {
+function AuthorizationForm({
+  header,
+  buttonName,
+  formText,
+  path,
+  linkText,
+  handleChange,
+  name,
+  email,
+  password,
+}) {
   const hidden = `${path === "/signup" ? "hidden" : ""}`;
+  const [formValid, setFormValid] = useState(false);
+  const [nameClass, setNameClass] = useState("");
+  const [emailClass, setEmailClass] = useState("");
+  const [passwordClass, setPasswordClass] = useState("");
+  const [errorValue, setErrorValue] = useState({
+    nameError: "Это поле не может быть пустым",
+    emailError: "Это поле не может быть пустым",
+    passwordError: "Это поле не может быть пустым",
+  });
+
+  const handleErrorMessage = async (e) => {
+    const { name, validationMessage } = e.target;
+    setErrorValue({ ...errorValue, [`${name}Error`]: validationMessage });
+    return validationMessage;
+  };
+
+  const handleEmailErrorMessage = async (e) => {
+    const { name, value } = e.target;
+    const re = /^((([0-9A-Za-z]{1}[-0-9A-z.]{0,30}[0-9A-Za-z]?)|([0-9А-Яа-я]{1}[-0-9А-я.]{0,30}[0-9А-Яа-я]?))@([-A-Za-z]{1,}\.){1,}[-A-Za-z]{2,})$/i;
+    if (value === '') {
+      setErrorValue(errorValue);
+    } else if (!re.test(String(value).toLocaleLowerCase())) {
+      setErrorValue({ ...errorValue, [`${name}Error`]: "Вы ввели некорректный имейл" });
+    } else {
+      setErrorValue({ ...errorValue, [`${name}Error`]: "" });
+    }
+    return errorValue.emailError;
+  };
+
+  function checkNameError(e) {
+    handleErrorMessage(e).then((message) => {
+      message === "" ? setNameClass("") : setNameClass("visible");
+    });
+  }
+
+  function checkEmailError(e) {
+    handleEmailErrorMessage(e).then((message) => {
+      message === "" ? setEmailClass("") : setEmailClass("visible");
+    });
+  }
+
+  function checkPasswordError(e) {
+    handleErrorMessage(e).then((message) => {
+      message === "" ? setPasswordClass("") : setPasswordClass("visible");
+    });
+  }
+
+  const { nameError, emailError, passwordError } = errorValue;
+
+  // console.log(passwordClass);
+  // console.log(errorValue.passwordError);
+
+  useEffect(() => {
+    if (nameError || emailError || passwordError) {
+      setFormValid(false);
+    } else {
+      setFormValid(true);
+    }
+  }, [nameError, emailError, passwordError]);
+
   return (
-    <form className="form">
+    <form className="form" noValidate>
       <Link to="/" className="form__logo">
         <img src={logo} alt="логотип" />
       </Link>
@@ -15,57 +86,82 @@ function AuthorizationForm({ header, buttonName, formText, path, linkText }) {
           Имя
         </label>
         <input
-          id="authorization-name"
-          className={`form__input ${hidden}`}
+          id="authorization1-name"
+          className={`form__input ${hidden} ${
+            nameClass === "visible" ? `form__input_red` : ""
+          }`}
           type="text"
-          name="authorization-name"
+          name="name"
           minLength="2"
           maxLength="200"
+          onChange={(e) => handleChange(e, handleErrorMessage)}
+          onBlur={checkNameError}
+          onFocus={() => {
+            setNameClass("");
+          }}
+          value={name}
           required
         />
         <span
           id="authorization-name-error"
-          className={`error form__input_error ${hidden}`}
+          className={`error form__input_error ${nameClass}`}
         >
-          Что-то пошло не так...
+          {nameError}
         </span>
         <label for="authorization-email" className="form__label">
           E-mail
         </label>
         <input
           id="authorization-email"
-          className="form__input"
+          className={`form__input ${
+            emailClass !== "" ? `form__input_red` : ""
+          }`}
           type="email"
-          name="authorization-email"
+          name="email"
+          onChange={(e) => handleChange(e, handleEmailErrorMessage)}
+          onBlur={checkEmailError}
+          onFocus={() => {
+            setEmailClass("");
+          }}
+          value={email}
           required
         />
         <span
           id="authorization-email-error"
-          className="error form__input_error"
+          className={`error form__input_error ${emailClass}`}
         >
-          Что-то пошло не так...
+          {emailError}
         </span>
         <label for="authorization-password" className="form__label">
           Пароль
         </label>
         <input
           id="authorization-password"
-          className="form__input"
+          className={`form__input ${
+            passwordClass !== "" ? `form__input_red` : ""
+          }`}
           type="password"
-          name="authorization-password"
-          minLength="2"
+          name="password"
+          minLength="5"
           maxLength="200"
+          onChange={(e) => handleChange(e, handleErrorMessage)}
+          onBlur={checkPasswordError}
+          onFocus={() => {
+            setPasswordClass("");
+          }}
+          value={password}
           required
         />
         <span
           id="iauthorization-password-error"
-          className="error form__input_error"
+          className={`error form__input_error ${passwordClass}`}
         >
-          Что-то пошло не так...
+          {passwordError}
         </span>
       </div>
       <div className="form__button-container">
         <button
+          disabled={!formValid}
           className={`button form__button ${
             path === "/signup" ? "form__button_margin" : ""
           }`}

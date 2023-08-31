@@ -42,8 +42,18 @@
     font-weight: 400;
 }
 
+.form__input_red {
+    color: red;
+}
+
 .form__input_error {
     height: 14px;
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
+    color: red;
 }
 
 .form__button {
@@ -69,6 +79,10 @@
 
 .form__button_margin {
     margin-top: 202px;
+}
+
+button:disabled {
+    background: red;
 }
 
 @media (max-width: 768px) {
