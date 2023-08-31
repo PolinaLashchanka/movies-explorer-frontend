@@ -19,9 +19,11 @@ function AuthorizationForm({
   const [nameClass, setNameClass] = useState("");
   const [emailClass, setEmailClass] = useState("");
   const [passwordClass, setPasswordClass] = useState("");
+  const [errorEmailValue, setErrorEmailValue] = useState(
+    "Это поле не может быть пустым"
+  );
   const [errorValue, setErrorValue] = useState({
     nameError: "Это поле не может быть пустым",
-    emailError: "Это поле не может быть пустым",
     passwordError: "Это поле не может быть пустым",
   });
 
@@ -32,16 +34,17 @@ function AuthorizationForm({
   };
 
   const handleEmailErrorMessage = async (e) => {
-    const { name, value } = e.target;
-    const re = /^((([0-9A-Za-z]{1}[-0-9A-z.]{0,30}[0-9A-Za-z]?)|([0-9А-Яа-я]{1}[-0-9А-я.]{0,30}[0-9А-Яа-я]?))@([-A-Za-z]{1,}\.){1,}[-A-Za-z]{2,})$/i;
-    if (value === '') {
-      setErrorValue(errorValue);
+    const { value } = e.target;
+    const re =
+      /^((([0-9A-Za-z]{1}[-0-9A-z.]{0,30}[0-9A-Za-z]?)|([0-9А-Яа-я]{1}[-0-9А-я.]{0,30}[0-9А-Яа-я]?))@([-A-Za-z]{1,}\.){1,}[-A-Za-z]{2,})$/i;
+    if (value === "") {
+      setErrorEmailValue("Это поле не может быть пустым");
     } else if (!re.test(String(value).toLocaleLowerCase())) {
-      setErrorValue({ ...errorValue, [`${name}Error`]: "Вы ввели некорректный имейл" });
+      setErrorEmailValue("Вы ввели некорректный имейл");
     } else {
-      setErrorValue({ ...errorValue, [`${name}Error`]: "" });
+      setErrorEmailValue("");
     }
-    return errorValue.emailError;
+    return errorEmailValue;
   };
 
   function checkNameError(e) {
@@ -52,6 +55,7 @@ function AuthorizationForm({
 
   function checkEmailError(e) {
     handleEmailErrorMessage(e).then((message) => {
+      console.log(message);
       message === "" ? setEmailClass("") : setEmailClass("visible");
     });
   }
@@ -62,18 +66,18 @@ function AuthorizationForm({
     });
   }
 
-  const { nameError, emailError, passwordError } = errorValue;
+  const { nameError, passwordError } = errorValue;
 
   // console.log(passwordClass);
   // console.log(errorValue.passwordError);
 
   useEffect(() => {
-    if (nameError || emailError || passwordError) {
+    if (nameError || errorEmailValue || passwordError) {
       setFormValid(false);
     } else {
       setFormValid(true);
     }
-  }, [nameError, emailError, passwordError]);
+  }, [nameError, errorEmailValue, passwordError]);
 
   return (
     <form className="form" noValidate>
@@ -130,7 +134,7 @@ function AuthorizationForm({
           id="authorization-email-error"
           className={`error form__input_error ${emailClass}`}
         >
-          {emailError}
+          {errorEmailValue}
         </span>
         <label for="authorization-password" className="form__label">
           Пароль
