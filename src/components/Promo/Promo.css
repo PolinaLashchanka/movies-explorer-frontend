@@ -29,7 +29,7 @@
 }
 
 .promo__button {
-    background-color: inherit;
+    text-decoration: none;
     width: 128px;
     height: 36px;
     border-radius: 3px;
@@ -37,7 +37,10 @@
     color: #FFF;
     font-size: 12px;
     font-weight: 500;
-    line-height: 16px;    
+    line-height: 16px;
+    cursor: pointer;
+    padding: 9px 18px;
+    box-sizing: border-box;
 }
 
 @media (max-width: 900px) {

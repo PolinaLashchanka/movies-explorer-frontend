@@ -38,7 +38,7 @@
 .header__link_signin {
     width: 76px;
     height: 32px;
-    background-color: #3DDC84;
+    background-color: rgba(61, 220, 132, 1);
     color: #000;
     border-radius: 3px;
     align-items: center;
@@ -142,6 +142,10 @@
         font-size: 18px;
         font-weight: 500;
         position: relative;
+    }
+
+    .header__burger-link:hover {
+        opacity: 1;
     }
 
     .header__profile-text {

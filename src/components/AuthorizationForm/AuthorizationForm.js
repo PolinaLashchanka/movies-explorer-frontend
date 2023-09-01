@@ -23,7 +23,7 @@ function AuthorizationForm({
     "Это поле не может быть пустым"
   );
   const [errorValue, setErrorValue] = useState({
-    nameError: "Это поле не может быть пустым",
+    nameError: `${path === '/signup' ? "" : "Это поле не может быть пустым"}`,
     passwordError: "Это поле не может быть пустым",
   });
 
@@ -55,7 +55,6 @@ function AuthorizationForm({
 
   function checkEmailError(e) {
     handleEmailErrorMessage(e).then((message) => {
-      console.log(message);
       message === "" ? setEmailClass("") : setEmailClass("visible");
     });
   }
@@ -67,9 +66,6 @@ function AuthorizationForm({
   }
 
   const { nameError, passwordError } = errorValue;
-
-  // console.log(passwordClass);
-  // console.log(errorValue.passwordError);
 
   useEffect(() => {
     if (nameError || errorEmailValue || passwordError) {
@@ -86,7 +82,7 @@ function AuthorizationForm({
       </Link>
       <h2 className="form__header">{header}</h2>
       <div className="form__input-container">
-        <label for="authorization-name" className={`form__label ${hidden}`}>
+        <label htmlFor="authorization-name" className={`form__label ${hidden}`}>
           Имя
         </label>
         <input
@@ -112,7 +108,7 @@ function AuthorizationForm({
         >
           {nameError}
         </span>
-        <label for="authorization-email" className="form__label">
+        <label htmlFor="authorization-email" className="form__label">
           E-mail
         </label>
         <input
@@ -136,7 +132,7 @@ function AuthorizationForm({
         >
           {errorEmailValue}
         </span>
-        <label for="authorization-password" className="form__label">
+        <label htmlFor="authorization-password" className="form__label">
           Пароль
         </label>
         <input
@@ -175,7 +171,7 @@ function AuthorizationForm({
         <p className="form__text">
           {formText}
           <span>
-            <Link to={path} className="form__link">
+            <Link to={path} className="form__link link">
               {linkText}
             </Link>
           </span>

@@ -1,4 +1,3 @@
-import "./Register.css";
 import AuthorizationForm from "../AuthorizationForm/AuthorizationForm";
 import { useState } from "react";
 

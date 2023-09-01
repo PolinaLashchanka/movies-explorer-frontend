@@ -17,7 +17,7 @@ function Portfolio() {
             <img
               src={linkArrow}
               alt="ссылка на сайт ввиде стрелки"
-              className="portfolio__link-image"
+              className="portfolio__link-image link"
             />
           </a>
         </li>
@@ -25,14 +25,14 @@ function Portfolio() {
           <p className="portfolio__link-name">Адаптивный сайт</p>
           <a
             className="portfolio__link-item "
-            href="https://github.com/PolinaLashchanka/how-to-learn"
+            href="https://github.com/PolinaLashchanka/russian-travel"
             target="_blank"
             rel="noreferrer"
           >
             <img
               src={linkArrow}
               alt="ссылка на сайт ввиде стрелки"
-              className="portfolio__link-image"
+              className="portfolio__link-image link"
             />
           </a>
         </li>
@@ -40,14 +40,14 @@ function Portfolio() {
           <p className="portfolio__link-name">Одностраничное приложение</p>
           <a
             className="portfolio__link-item "
-            href="https://github.com/PolinaLashchanka/how-to-learn"
+            href="https://github.com/PolinaLashchanka/react-mesto-auth"
             target="_blank"
             rel="noreferrer"
           >
             <img
               src={linkArrow}
               alt="ссылка на сайт ввиде стрелки"
-              className="portfolio__link-image"
+              className="portfolio__link-image link"
             />
           </a>
         </li>

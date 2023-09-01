@@ -25,7 +25,7 @@ function Profile() {
         <span
           id="input-profile-edit-error"
           className="error profile__form-input_error profile__form-input_name"
-        >Что-то пошло не так...</span>
+        ></span>
         <input
           id="input-profile-edit"
           className="profile__form-input"
@@ -39,16 +39,16 @@ function Profile() {
         <span
           id="input-profile-edit-error"
           className="error profile__form-input_error profile__form-input_email"
-        >Что-то пошло не так...</span>
+        ></span>
         {!edit ? (
           <>
             <button
               onClick={editProfile}
-              className="profile__button profile__edit-button"
+              className="profile__button profile__edit-button link"
             >
               Редактировать
             </button>
-            <button className="profile__button profile__exit-button">
+            <button className="profile__button profile__exit-button link">
               Выйти из аккаунта
             </button>
           </>

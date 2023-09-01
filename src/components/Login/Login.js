@@ -1,6 +1,21 @@
 import AuthorizationForm from "../AuthorizationForm/AuthorizationForm";
+import { useState } from "react";
 
 function Login() {
+
+  const [formValue, setFormValue] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e, func) => {
+    const { name, value } = e.target;
+    setFormValue({ ...formValue, [name]: value });
+    func(e);
+};
+
+  const { email, password } = formValue;
+
   return (
     <main className="authorization">
       <AuthorizationForm
@@ -9,6 +24,9 @@ function Login() {
         formText={"Еще не зарегистированы?"}
         path={"/signup"}
         linkText={"Регистрация"}
+        handleChange={handleChange}
+        email={email}
+        password={password}
       />
     </main>
   );

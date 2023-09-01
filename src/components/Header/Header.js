@@ -25,13 +25,13 @@ function Header() {
         <header className="header header_main">
           {logoLink}
           <div className="header__link-container">
-            <Link to="/signup" replace className="header__link">
+            <Link to="/signup" replace className="header__link link">
               Регистрация
             </Link>
             <Link
               to="/signin"
               replace
-              className="header__link header__link_signin"
+              className="header__link header__link_signin link"
             >
               Войти
             </Link>
@@ -46,16 +46,16 @@ function Header() {
           <div className={`header__burger-overlay ${active}`}></div>
           <div className={`header__link-container header__link-burger-container ${active}`}>
             <div className="heder__movie-link-container">
-            <Link onClick={closeNav} to="/" className="header__link header__burger-link header__main-burger-link">Главная</Link>
-            <Link onClick={closeNav} to="/movies" className="header__link header__burger-link" style={path === "/movies" ? {fontWeight: 500} : {}}>
+            <Link onClick={closeNav} to="/" className="link header__link header__burger-link header__main-burger-link">Главная</Link>
+            <Link onClick={closeNav} to="/movies" className="header__link header__burger-link link" style={path === "/movies" ? {fontWeight: 500} : {}}>
               Фильмы
             </Link>
-            <Link onClick={closeNav} to="/saved-movies" className="header__link header__burger-link" style={path === "/saved-movies" ? {fontWeight: 500} : {}}>
+            <Link onClick={closeNav} to="/saved-movies" className="header__link header__burger-link link" style={path === "/saved-movies" ? {fontWeight: 500} : {}}>
               Сохраненные фильмы
             </Link>
             </div>
               <div className="header__profile">
-            <Link onClick={closeNav} to="/profile" className="header__link header__burger-link" style={path === "/profile" ? {fontWeight: 500} : {}}>
+            <Link onClick={closeNav} to="/profile" className="header__link header__burger-link link" style={path === "/profile" ? {fontWeight: 500} : {}}>
                 <p className="header__profile-text">Аккаунт</p>
                 <img
                   className="header__profile-icon"

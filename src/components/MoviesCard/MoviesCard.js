@@ -18,8 +18,8 @@ function MoviesCard(props) {
                 <p className="card__duration">{props.duration}</p>
             </div>
             <div className="card__image" style={{backgroundImage: `url(${props.url})`}}></div>
-            {path === '/movies' && (<button onClick={save} className={`card__save-button ${isSaved ? 'card__save-button_saved' : ''}`}>{isSaved ? '' : 'Сохранить'}</button>)}
-            {path === '/saved-movies' && (<button className="card__save-button">&#10006;</button>)}
+            {path === '/movies' && (<button onClick={save} className={`button card__save-button ${isSaved ? 'card__save-button_saved' : ''}`}>{isSaved ? '' : 'Сохранить'}</button>)}
+            {path === '/saved-movies' && (<button className="button card__save-button">&#10006;</button>)}
         </div>
     );
 }

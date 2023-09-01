@@ -17,7 +17,7 @@ function Footer() {
             <div className="footer__yandex">
               <p className="footer__text">Яндекс.Практикум</p>
               <a
-                className="footer__github"
+                className="footer__github link"
                 href="https://github.com/Yandex-Practicum"
                 target="_blank"
                 rel="noreferrer"

@@ -42,6 +42,10 @@
     font-weight: 400;
 }
 
+.form__input:focus {
+    border-bottom: 1px solid #4285F4;
+}
+
 .form__input_red {
     color: red;
 }
@@ -81,9 +85,14 @@
     margin-top: 202px;
 }
 
-button:disabled {
-    background: red;
+button:disabled:hover {
+    opacity: 1;
+    cursor: default;
 }
+
+
+
+
 
 @media (max-width: 768px) {
     .form__logo {
