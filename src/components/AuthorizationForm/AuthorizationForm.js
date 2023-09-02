@@ -104,7 +104,7 @@ function AuthorizationForm({
         />
         <span
           id="authorization-name-error"
-          className={`error form__input_error ${nameClass}`}
+          className={`error form__input_error ${hidden} ${nameClass}`}
         >
           {nameError}
         </span>

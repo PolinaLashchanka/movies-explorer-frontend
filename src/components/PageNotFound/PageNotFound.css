@@ -1,14 +1,15 @@
 .not-found {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
+    padding-bottom: 60px;
 }
 
 .not-found__header {
     text-align: center;
     font-size: 140px;
     font-weight: 400;
-    margin: 246px 0 5px;
+    margin: 250px 0 9px;
 }
 
 .not-found__text {
@@ -26,8 +27,12 @@
 }
 
 @media (max-width: 768px) {
+    .not-found {
+        padding-bottom:222px;
+    }
+
     .not-found__header {
-        margin-top: 408px;
+        margin-top: 412px;
     }
 }
 

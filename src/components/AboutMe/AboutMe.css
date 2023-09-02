@@ -1,5 +1,5 @@
 .about-me {
-    padding: 111px 70px 86px;
+    padding: 113px 70px 86px;
 }
 
 .about-me__container {
@@ -34,7 +34,8 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 22px;
-    margin: 7px 0 98px;
+    margin-top: 7px;
+    min-height: 175px;
 }
 
 .about-me__github {
@@ -57,7 +58,7 @@
 
 @media (max-width: 768px) {
     .about-me {
-        padding: 90px 50px 78px;
+        padding: 95px 50px 76px;
     }
 
     .about-me__container {
@@ -78,7 +79,8 @@
     .about-me__info {
         font-size: 12px;
         line-height: 18px;
-        margin: 12px 0 89px;
+        margin-top: 12px;
+        min-height: 182px;
     }
 
     .about-me__image {
@@ -102,7 +104,7 @@
 
 @media (max-width: 600px) {
     .about-me {
-        padding: 87px 14px 50px;
+        padding: 90px 14px 50px;
     }
 
     .about-me__name {
@@ -124,6 +126,7 @@
     .about-me__info {
         font-size: 11px;
         line-height: 16px;
-        margin: 9px 0 40px;
+        margin-top: 9px;
+        min-height: 142px;
     }
 }

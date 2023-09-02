@@ -13,8 +13,7 @@
     font-size: 24px;
     font-weight: 500;
     align-self: flex-start;
-    margin-top: 17px;
-    margin-bottom: 35px;
+    margin: 17px 0 35px;
 }
 
 .form__input-container {
@@ -51,7 +50,7 @@
 }
 
 .form__input_error {
-    height: 14px;
+    height: 15px;
     visibility: hidden;
 }
 
@@ -90,12 +89,37 @@ button:disabled:hover {
     cursor: default;
 }
 
-
-
-
-
 @media (max-width: 768px) {
     .form__logo {
         margin: 154px 0 19px;
+    }
+}
+
+@media (max-width: 470px) {
+    .form__logo {
+        margin: -22px 0 19px;
+        align-self: center;
+    }
+
+    .form__header {
+        align-self: center;
+        margin: 27px 0 77px;
+    }
+
+    .form {
+        padding: 0 30px;
+    }
+
+    .form__button {
+        margin-top: 219px;
+    }
+
+    .form__text {
+        font-size: 12px;
+        margin-top: 14px;
+    }
+
+    .form__button_margin {
+        margin-top: 288px;
     }
 }

@@ -1,5 +1,5 @@
 .about {
-    padding: 110px 70px 91px;
+    padding: 113px 70px 91px;
 }
 
 .grid {
@@ -75,13 +75,13 @@
 
 @media (max-width: 320px) {
     .about {
-        padding: 70px 18px 71px;
+        padding: 72px 18px 71px;
     }
 
     .about__grid-text {
         grid-template-columns: 1fr;
         grid-auto-flow: row;
-        gap: 12px;
+        gap: 13px;
         margin: 89px 0 63px;
     }
 

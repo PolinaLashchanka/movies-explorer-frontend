@@ -17,7 +17,7 @@ function Register() {
   const { name, email, password } = formValue;
 
   return (
-    <main className="authorization">
+    <main className="authorization register">
       <AuthorizationForm
         header={"Добро пожаловать!"}
         buttonName={"Зарегистироваться"}

@@ -1,4 +1,5 @@
 @import url('../../vendor/fonts/fonts.css');
+@import url('../../vendor/normalize.css');
 
 .page {
   text-align: center;

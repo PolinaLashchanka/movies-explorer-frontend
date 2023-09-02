@@ -1,5 +1,6 @@
 .profile {
     min-height: calc(100vh - 78px);
+    padding-bottom: 70px;
 }
 
 .profile__header {
@@ -11,7 +12,7 @@
 .profile__form {
     display: flex;
     flex-direction: column;
-    width: 410px;
+    max-width: 410px;
     margin: 0 auto;
 }
 
@@ -32,6 +33,7 @@
     position: relative;
     text-align: end;
     margin: 0;
+    height: 14px;
 }
 
 .profile__form-input_name::after {
@@ -86,11 +88,33 @@
 }
 
 @media (max-width: 768px) {
+    .profile {
+        padding-bottom: 269px;
+    }
+
     .profile__header {
         margin: 230px 0 80px;
     }
 
     .profile__edit-button {
         margin: 193px 0 14px;
+    }
+}
+
+@media (max-width: 470px) {
+    .profile {
+        padding-bottom: 40px;
+    }
+
+    .profile__header {
+        margin: 67px 0 60px;
+    }
+
+    .profile__form {
+        margin: 0 30px;
+    }
+
+    .profile__edit-button {
+        margin: 361px 0 14px;
     }
 }

@@ -56,6 +56,12 @@ code {
   opacity: 0.7;
 }
 
+@media (max-width: 768px) {
+  .authorization {
+      padding-bottom: 232px;
+  }
+}
+
 @media (max-width: 320px) {
   .main {
     min-height: calc(100vh - 253px - 78px);

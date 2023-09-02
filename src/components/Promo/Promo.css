@@ -64,14 +64,14 @@
 
     .promo__paragraph {
         max-width: 260px;
-        margin: 22px 0 92px;
+        margin: 22px 0 95px;
     }
 }
 
 @media (max-width: 440px) {
     .promo {
         padding: 65px 0 30px;
-        gap: 43px;
+        gap: 44px;
     }
     .promo__image {
         width: 210px;
