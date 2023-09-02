@@ -17,7 +17,7 @@ function Register() {
   const { name, email, password } = formValue;
 
   return (
-    <main className="authorization register">
+    <section className="authorization register">
       <AuthorizationForm
         header={"Добро пожаловать!"}
         buttonName={"Зарегистироваться"}
@@ -29,7 +29,7 @@ function Register() {
         email={email}
         password={password}
       />
-    </main>
+    </section>
   );
 }
 

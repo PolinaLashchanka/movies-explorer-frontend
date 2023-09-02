@@ -49,7 +49,7 @@
     color: red;
 }
 
-.form__input_error {
+.form__input-error {
     height: 15px;
     visibility: hidden;
 }
@@ -85,9 +85,7 @@
 }
 
 button:disabled {
-    background: #F8F8F8;;
     cursor: default;
-    color: #000;
 }
 
 button:disabled:hover {

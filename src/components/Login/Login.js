@@ -17,7 +17,7 @@ function Login() {
   const { email, password } = formValue;
 
   return (
-    <main className="authorization login">
+    <section className="authorization login">
       <AuthorizationForm
         header={"Рады видеть!"}
         buttonName={"Войти"}
@@ -28,7 +28,7 @@ function Login() {
         email={email}
         password={password}
       />
-    </main>
+    </section>
   );
 }
 

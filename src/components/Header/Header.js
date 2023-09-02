@@ -45,7 +45,7 @@ function Header() {
           {logoLink}
           <div className={`header__burger-overlay ${active}`}></div>
           <div className={`header__link-container header__link-burger-container ${active}`}>
-            <div className="heder__movie-link-container">
+            <div className="header__movie-link-container">
             <Link onClick={closeNav} to="/" className="link header__link header__burger-link header__main-burger-link">Главная</Link>
             <Link onClick={closeNav} to="/movies" className="header__link header__burger-link link" style={path === "/movies" ? {fontWeight: 500} : {}}>
               Фильмы
@@ -66,7 +66,7 @@ function Header() {
               </div>
           </div>
           <div onClick={closeNav} className="header__burger-btn">
-            {nav ? <AiOutlineClose size={27} className="header__burger-btn_fixed" />: <AiOutlineMenu size={29} />}
+            {nav ? <AiOutlineClose size={27} className="header__btn_fixed" />: <AiOutlineMenu size={29} />}
           </div>
         </header>
       )}

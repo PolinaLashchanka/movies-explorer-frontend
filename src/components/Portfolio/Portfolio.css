@@ -34,8 +34,9 @@
 
 .portfolio__link-item {
     display: flex;
-    align-items: center;
-    margin-right: 6px;
+    justify-content: space-between;
+    width: 100%;
+    text-decoration: none;
 }
 
 .portfolio__link-line {

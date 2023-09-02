@@ -29,14 +29,14 @@
     outline: none;
 }
 
-.profile__form-input_error {
+.profile__form-input-error {
     position: relative;
     text-align: end;
     margin: 0;
     height: 14px;
 }
 
-.profile__form-input_name::after {
+.profile__form-input-name::after {
     content: '';
     position: absolute;
     left: 0;
@@ -46,7 +46,7 @@
     background-color: #424242;
 }
 
-.profile__form-input_name::before {
+.profile__form-input-name::before {
     content: 'Имя';
     position: absolute;
     left: 0;
@@ -56,7 +56,7 @@
     font-weight: 500;
 }
 
-.profile__form-input_email::before {
+.profile__form-input-email::before {
     content: 'E-mail';
     position: absolute;
     left: 0;
@@ -81,6 +81,8 @@
 .profile__exit-button {
     color: rgb(238, 52, 101);
     font-weight: 500;
+    text-decoration: none;
+    font-size: 13px;
 }
 
 .profile__save-button {

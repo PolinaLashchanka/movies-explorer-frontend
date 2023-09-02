@@ -7,47 +7,47 @@ function Portfolio() {
       <h2 className="portfolio__header">Портфолио</h2>
       <ul className="portfolio__links">
         <li className="portfolio__link portfolio__link-line">
-          <p className="portfolio__link-name">Статичный сайт</p>
           <a
-            className="portfolio__link-item "
+            className="portfolio__link-item  link"
             href="https://github.com/PolinaLashchanka/how-to-learn"
             target="_blank"
             rel="noreferrer"
           >
+          <p className="portfolio__link-name">Статичный сайт</p>
             <img
               src={linkArrow}
               alt="ссылка на сайт ввиде стрелки"
-              className="portfolio__link-image link"
+              className="portfolio__link-image"
             />
           </a>
         </li>
         <li className="portfolio__link portfolio__link-line">
-          <p className="portfolio__link-name">Адаптивный сайт</p>
           <a
-            className="portfolio__link-item "
+            className="portfolio__link-item  link"
             href="https://github.com/PolinaLashchanka/russian-travel"
             target="_blank"
             rel="noreferrer"
           >
+          <p className="portfolio__link-name">Адаптивный сайт</p>
             <img
               src={linkArrow}
               alt="ссылка на сайт ввиде стрелки"
-              className="portfolio__link-image link"
+              className="portfolio__link-image"
             />
           </a>
         </li>
         <li className="portfolio__link">
-          <p className="portfolio__link-name">Одностраничное приложение</p>
           <a
-            className="portfolio__link-item "
+            className="portfolio__link-item  link"
             href="https://github.com/PolinaLashchanka/react-mesto-auth"
             target="_blank"
             rel="noreferrer"
           >
+          <p className="portfolio__link-name">Одностраничное приложение</p>
             <img
               src={linkArrow}
               alt="ссылка на сайт ввиде стрелки"
-              className="portfolio__link-image link"
+              className="portfolio__link-image"
             />
           </a>
         </li>

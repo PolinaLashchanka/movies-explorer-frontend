@@ -4,10 +4,10 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
 function SavedMovies({visibleFilms}) {
     return (
-        <main className="main saved-movies">
+        <section className="main saved-movies">
             <SearchForm />
             <MoviesCardList visibleFilms={visibleFilms}/>
-        </main>
+        </section>
     );
 }
 

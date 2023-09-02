@@ -1,4 +1,4 @@
-.section__header {
+.section-header {
     font-size: 22px;
     font-weight: 400;
     letter-spacing: -0.88px;
@@ -7,7 +7,7 @@
     margin: 0;
 }
 
-.section__header::before {
+.section-header::before {
     content: '';
     position: absolute;
     left: 0;
@@ -18,12 +18,12 @@
 }
 
 @media (max-width: 320px) {
-    .section__header {
+    .section-header {
         font-size: 18px;
         letter-spacing: -0.72px;
     }
     
-    .section__header::before {
+    .section-header::before {
         bottom: -28px;
     }
 }

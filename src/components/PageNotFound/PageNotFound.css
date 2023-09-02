@@ -1,8 +1,7 @@
 .not-found {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    padding-bottom: 60px;
+    height: 100vh;
 }
 
 .not-found__header {
@@ -27,10 +26,6 @@
 }
 
 @media (max-width: 768px) {
-    .not-found {
-        padding-bottom:222px;
-    }
-
     .not-found__header {
         margin-top: 412px;
     }

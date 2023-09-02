@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Profile.css";
 
 function Profile() {
@@ -9,11 +10,11 @@ function Profile() {
   }
 
   return (
-    <main className="profile">
+    <section className="profile">
       <h2 className="profile__header">Привет, Полина!</h2>
       <form className="profile__form">
         <input
-          id="input-profile-edit"
+          id="edit-name"
           className="profile__form-input "
           type="text"
           defaultValue="Полина"
@@ -23,11 +24,11 @@ function Profile() {
           required
         />
         <span
-          id="input-profile-edit-error"
-          className="error profile__form-input_error profile__form-input_name"
+          id="edit-name-error"
+          className="error profile__form-input-error profile__form-input-name"
         ></span>
         <input
-          id="input-profile-edit"
+          id="edit-email"
           className="profile__form-input"
           type="text"
           defaultValue="pochta@yandex.ru"
@@ -37,8 +38,8 @@ function Profile() {
           required
         />
         <span
-          id="input-profile-edit-error"
-          className="error profile__form-input_error profile__form-input_email"
+          id="edit-email-error"
+          className="error profile__form-input-error profile__form-input-email"
         ></span>
         {!edit ? (
           <>
@@ -48,13 +49,15 @@ function Profile() {
             >
               Редактировать
             </button>
-            <button className="profile__button profile__exit-button link">
-              Выйти из аккаунта
-            </button>
+              <Link to="/" replace className="profile__exit-button link">
+                Выйти из аккаунта
+              </Link>
           </>
-        ) : (<button className="button profile__save-button">Сохранить</button>)}
+        ) : (
+          <button className="button profile__save-button">Сохранить</button>
+        )}
       </form>
-    </main>
+    </section>
   );
 }
 

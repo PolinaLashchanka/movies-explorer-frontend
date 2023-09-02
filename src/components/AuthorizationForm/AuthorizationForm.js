@@ -86,7 +86,7 @@ function AuthorizationForm({
           Имя
         </label>
         <input
-          id="authorization1-name"
+          id="authorization-name"
           className={`form__input ${hidden} ${
             nameClass === "visible" ? `form__input_red` : ""
           }`}
@@ -104,7 +104,7 @@ function AuthorizationForm({
         />
         <span
           id="authorization-name-error"
-          className={`error form__input_error ${hidden} ${nameClass}`}
+          className={`error form__input-error ${hidden} ${nameClass}`}
         >
           {nameError}
         </span>
@@ -128,7 +128,7 @@ function AuthorizationForm({
         />
         <span
           id="authorization-email-error"
-          className={`error form__input_error ${emailClass}`}
+          className={`error form__input-error ${emailClass}`}
         >
           {errorEmailValue}
         </span>
@@ -153,8 +153,8 @@ function AuthorizationForm({
           required
         />
         <span
-          id="iauthorization-password-error"
-          className={`error form__input_error ${passwordClass}`}
+          id="authorization-password-error"
+          className={`error form__input-error ${passwordClass}`}
         >
           {passwordError}
         </span>
