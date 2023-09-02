@@ -30,7 +30,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/movies" element={<Movies visibleFilms={allFilms}/>} />
-        <Route path="/saved-movies" element={<SavedMovies films={savedFilms}/>} />
+        <Route path="/saved-movies" element={<SavedMovies visibleFilms={savedFilms}/>} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Login />} />
