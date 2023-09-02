@@ -84,9 +84,14 @@
     margin-top: 202px;
 }
 
+button:disabled {
+    background: #F8F8F8;;
+    cursor: default;
+    color: #000;
+}
+
 button:disabled:hover {
     opacity: 1;
-    cursor: default;
 }
 
 @media (max-width: 768px) {
