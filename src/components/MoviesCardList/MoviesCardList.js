@@ -2,13 +2,13 @@ import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import { useLocation } from "react-router-dom";
 
-function MoviesCardList({films}) {
+function MoviesCardList({ visibleFilms }) {
   const location = useLocation();
   const path = location.pathname;
   return (
     <section className="movies-list">
-      <div className={`movies-list__container ${path === '/movies' ? 'movies-list__row-count' : ''}`}>
-        {films.map((film) => (
+      <div className="movies-list__container">
+        {visibleFilms.map((film) => (
           <MoviesCard key={film.id} {...film} />
         ))}
       </div>

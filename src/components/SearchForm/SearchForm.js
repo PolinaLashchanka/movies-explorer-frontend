@@ -15,7 +15,7 @@ function SearchForm() {
           required
         />
         <span id="input-film-search-error" className="search-form__input_error"></span>
-        <button className="button search-form__button">Поиск</button>
+        <button className="button search-form__button" >Поиск</button>
       </form>
       <FilterCheckbox />
     </section>

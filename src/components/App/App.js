@@ -14,23 +14,22 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 
 function App() {
 
-  const [films, setFilms] = useState([]);
+  const [allFilms, setAllFilms] = useState([]);
   const [savedFilms, setSavedFilms] = useState([]);
 
   useEffect(() => {
     Promise.all([api.getFilms(), api.getSavedFilms()])
     .then(([films, savedFilms]) => {
-      setFilms(films);
+      setAllFilms(films);
       setSavedFilms(savedFilms);
     })
   }, []);
-
   return (
     <div className="page">
       <Header />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/movies" element={<Movies films={films}/>} />
+        <Route path="/movies" element={<Movies visibleFilms={allFilms}/>} />
         <Route path="/saved-movies" element={<SavedMovies films={savedFilms}/>} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<Register />} />
