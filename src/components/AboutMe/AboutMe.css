@@ -1,0 +1,132 @@
+.about-me {
+    padding: 113px 70px 86px;
+}
+
+.about-me__container {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    margin-top: 90px;
+}
+
+.about-me__text-container {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    max-width: 599px;
+}
+
+.about-me__name {
+    font-size: 50px;
+    font-weight: 400;
+    line-height: 58px;
+    letter-spacing: -2px;
+    margin: 0;
+}
+
+.about-me__description {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+.about-me__info {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    margin-top: 7px;
+    min-height: 175px;
+}
+
+.about-me__github {
+    text-decoration: none;
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+.about-me__image {
+    background-image: url('../../images/profile-pic.JPG');
+    min-width: 270px;
+    height: 327px;
+    border-radius: 10px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+@media (max-width: 768px) {
+    .about-me {
+        padding: 95px 50px 76px;
+    }
+
+    .about-me__container {
+        gap: 45px;
+    }
+
+    .about-me__name {
+        font-size: 40px;
+        line-height: 40px;
+        letter-spacing: -1.6px;
+    }
+
+    .about-me__description {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .about-me__info {
+        font-size: 12px;
+        line-height: 18px;
+        margin-top: 12px;
+        min-height: 182px;
+    }
+
+    .about-me__image {
+        min-width: 255px;
+        height: 307px;
+    }
+}
+
+@media (max-width: 600px) {
+    .about-me__container {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .about-me__image {
+        width: 292px;
+        height: 352px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .about-me {
+        padding: 90px 14px 50px;
+    }
+
+    .about-me__name {
+        font-size: 30px;
+        line-height: normal;
+        letter-spacing: -1.2px;
+    }
+
+    .about-me__container {
+        gap: 40px;
+    }
+
+    .about-me__description {
+        font-size: 11px;
+        line-height: 16px;
+        margin-top: 19px;
+    }
+
+    .about-me__info {
+        font-size: 11px;
+        line-height: 16px;
+        margin-top: 9px;
+        min-height: 142px;
+    }
+}

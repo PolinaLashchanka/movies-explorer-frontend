@@ -1,0 +1,29 @@
+.section-header {
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: -0.88px;
+    text-align: start;
+    position: relative;
+    margin: 0;
+}
+
+.section-header::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -24px;
+    width: 100%;
+    height: 1px;
+    background-color: #DADADA;
+}
+
+@media (max-width: 320px) {
+    .section-header {
+        font-size: 18px;
+        letter-spacing: -0.72px;
+    }
+    
+    .section-header::before {
+        bottom: -28px;
+    }
+}
