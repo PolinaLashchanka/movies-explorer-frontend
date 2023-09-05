@@ -120,7 +120,7 @@
 
     .header__link-burger-container {
         flex-direction: column;
-        gap: 50%;
+        gap: 615px;
         padding-top: 160px;
         position: fixed;
         right: -100%;
@@ -208,7 +208,7 @@
 
     .header__link-burger-container {
         width: 100%;
-        gap: 35%;
+        gap: 438px;
         padding-top: 143px;
     }
     
@@ -217,7 +217,7 @@
         line-height: normal;
     }
 
-    .heder__movie-link-container {
+    .header__movie-link-container {
         gap: 25px;
     }
 

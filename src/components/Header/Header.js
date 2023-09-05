@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Header.css";
 import logo from "../../images/logo.svg";
@@ -16,8 +16,12 @@ function Header() {
   );
 
   const [nav, setNav] = useState(false);
-  const active = nav ? 'active' : ' ';
+  const active = nav ? 'active' : '';
   const closeNav = () => setNav(!nav);
+
+  useEffect(() => {
+    document.body.classList.toggle('overflow')
+  }, [nav])
 
   return (
     <>
@@ -66,7 +70,7 @@ function Header() {
               </div>
           </div>
           <div onClick={closeNav} className="header__burger-btn">
-            {nav ? <AiOutlineClose size={27} className="header__btn_fixed" />: <AiOutlineMenu size={29} />}
+            {active !== '' ? <AiOutlineClose size={27} className="header__btn_fixed" />: <AiOutlineMenu size={29} />}
           </div>
         </header>
       )}

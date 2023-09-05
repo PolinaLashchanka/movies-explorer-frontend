@@ -12,24 +12,26 @@ function Register() {
     const { name, value } = e.target;
     setFormValue({ ...formValue, [name]: value });
     func(e);
-};
+  };
 
   const { name, email, password } = formValue;
 
   return (
-    <section className="authorization register">
-      <AuthorizationForm
-        header={"Добро пожаловать!"}
-        buttonName={"Зарегистироваться"}
-        formText={"Уже зарегистированы?"}
-        path={"/signin"}
-        linkText={"Войти"}
-        handleChange={handleChange}
-        name={name}
-        email={email}
-        password={password}
-      />
-    </section>
+    <main className="authorization register">
+      <section>
+        <AuthorizationForm
+          header={"Добро пожаловать!"}
+          buttonName={"Зарегистироваться"}
+          formText={"Уже зарегистированы?"}
+          path={"/signin"}
+          linkText={"Войти"}
+          handleChange={handleChange}
+          name={name}
+          email={email}
+          password={password}
+        />
+      </section>
+    </main>
   );
 }
 
