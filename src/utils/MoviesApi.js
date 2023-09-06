@@ -13,7 +13,7 @@ class Api {
   }
 
   getFilms() {
-    return fetch(`${this._url}films`, {
+    return fetch(`${this._url}/`, {
       headers: this._headers,
     }).then((res) => this._checkError(res));
   }
@@ -25,13 +25,13 @@ class Api {
   }
 }
 
-const api = new Api({
-    url: "http://localhost:3000/",
+const moviesApi = new Api({
+    url: "https://api.nomoreparties.co/beatfilm-movies",
     headers: {
       "content-type": "application/json",
     },
   });
   
-  export default api;
+  export default moviesApi;
 
 
