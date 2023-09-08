@@ -11,20 +11,26 @@ import Footer from "../Footer/Footer";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import { savedFilms } from "../../utils/constants";
 import moviesApi from "../../utils/MoviesApi";
+// import mainApi from "../../utils/MainApi";
 import { useEffect, useState } from "react";
+import { useResize } from "../../hooks/useResize";
 
 function App() {
-  const [movies, setMovies] = useState([]);
+  const [allMovies, setAllMovies] = useState([]);
+  const [visibleFilms, setVisibleFilms] = useState([]);
   const [short, setShort] = useState(false);
-  const [count, setCount] = useState(3);
+
+  const { setCountForScreenWidth, addMoreMovies, count } = useResize();
 
   async function initialSearch() {
     const movies = JSON.parse(localStorage.getItem("movies"));
     if (!movies) {
       const moviesFromApi = await moviesApi.getFilms();
       localStorage.setItem("movies", JSON.stringify(moviesFromApi));
+      setAllMovies(moviesFromApi);
       return moviesFromApi;
     }
+    setAllMovies(movies);
     return movies;
   }
 
@@ -38,6 +44,7 @@ function App() {
       );
     });
     localStorage.setItem("searchedMovies", JSON.stringify(searchedMovies));
+    localStorage.setItem("searchWord", JSON.stringify(word));
     return searchedMovies;
   }
 
@@ -48,8 +55,8 @@ function App() {
       }
       const films = await initialSearch();
       const searchedMovies = await selectedSearch(films, word);
-      setMovies(searchedMovies);
-      setCount(3);
+      setCountForScreenWidth();
+      setVisibleFilms(searchedMovies);
     } catch (err) {
       console.log(err);
     }
@@ -57,10 +64,6 @@ function App() {
 
   function searchShortMovies() {
     setShort(!short);
-  }
-
-  function addMoreMovies() {
-    setCount(count + 3);
   }
 
   return (
@@ -72,11 +75,12 @@ function App() {
           path="/movies"
           element={
             <Movies
-              visibleFilms={movies}
+              visibleFilms={visibleFilms}
               searchMovies={searchMovies}
               searchShortMovies={searchShortMovies}
               addMoreMovies={addMoreMovies}
               count={count}
+              setVisibleFilms={setVisibleFilms}
             />
           }
         />

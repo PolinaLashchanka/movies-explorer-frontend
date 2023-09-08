@@ -1,21 +1,12 @@
 import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
-import { useState } from "react";
 
-function SearchForm({ searchMovies, searchShortMovies }) {
-
-  const [formValue, setFormValue] = useState('');
-
-  const handleChange = (e) => {
-    const { value } = e.target;
-    setFormValue(value);
-};
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    searchMovies(formValue);
-  };
-
+function SearchForm({
+  searchShortMovies,
+  searchWord,
+  handleChange,
+  handleSubmit,
+}) {
   return (
     <section className="search-form">
       <form className="search-form__form">
@@ -28,13 +19,18 @@ function SearchForm({ searchMovies, searchShortMovies }) {
           maxLength="200"
           placeholder="Фильм"
           onChange={handleChange}
-          value={formValue}
+          value={searchWord}
           required
         />
-        <span id="input-film-search-error" className="search-form__input-error"></span>
-        <button className="button search-form__button" onClick={handleSubmit}>Поиск</button>
+        <span
+          id="input-film-search-error"
+          className="search-form__input-error"
+        ></span>
+        <button className="button search-form__button" onClick={handleSubmit}>
+          Поиск
+        </button>
       </form>
-      <FilterCheckbox searchShortMovies={searchShortMovies}/>
+      <FilterCheckbox searchShortMovies={searchShortMovies} />
     </section>
   );
 }

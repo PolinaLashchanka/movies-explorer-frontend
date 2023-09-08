@@ -17,7 +17,7 @@ function MoviesCard(props) {
                 <h2 className="card__name">{props.nameRU}</h2>
                 <p className="card__duration">{props.duration}</p>
             </div>
-            <div className="card__image" style={{backgroundImage: `url(${props.url})`}}></div>
+            <div className="card__image" style={{backgroundImage: `url(https://api.nomoreparties.co${props.image.url})`}}></div>
             {path === '/movies' && (<button onClick={save} className={`button card__save-button ${isSaved ? 'card__save-button_saved' : ''}`}>{isSaved ? '' : 'Сохранить'}</button>)}
             {path === '/saved-movies' && (<button className="button card__save-button">&#10006;</button>)}
         </div>
