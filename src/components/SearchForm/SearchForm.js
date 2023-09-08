@@ -6,6 +6,7 @@ function SearchForm({
   searchWord,
   handleChange,
   handleSubmit,
+  short
 }) {
   return (
     <section className="search-form">
@@ -30,7 +31,7 @@ function SearchForm({
           Поиск
         </button>
       </form>
-      <FilterCheckbox searchShortMovies={searchShortMovies} />
+      <FilterCheckbox searchShortMovies={searchShortMovies} short={short}/>
     </section>
   );
 }

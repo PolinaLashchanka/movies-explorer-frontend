@@ -2,19 +2,20 @@ import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import { useLocation } from "react-router-dom";
 
-function MoviesCardList({ visibleFilms, addMoreMovies, count }) {
+function MoviesCardList({ visibleMovies, addMoreMovies, count, short }) {
   const location = useLocation();
   const path = location.pathname;
+  const filteredMovies = short ? visibleMovies.filter((film) => film.duration < 41) : visibleMovies;
   
   return (
     <section className="movies-list">
       <div className="movies-list__container">
-        {visibleFilms.slice(0, count).map((film) => (
+        {filteredMovies.slice(0, count).map((film) => (
           <MoviesCard key={film.id} {...film} />
         ))}
       </div>
       {path === "/movies" ? (
-        (visibleFilms.length > 0) && (visibleFilms.length > count) ? (
+        (filteredMovies.length > 0) && (filteredMovies.length > count) ? (
           <button onClick={addMoreMovies} className="button movies-list__button">Ещё</button>
         ) : (
           ""

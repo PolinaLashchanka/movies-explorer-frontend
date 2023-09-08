@@ -4,19 +4,29 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import { useState, useEffect } from "react";
 
 function Movies({
-  visibleFilms,
+  searchedMovies,
   searchMovies,
-  searchShortMovies,
   addMoreMovies,
   count,
-  setVisibleFilms
 }) {
   const [searchWord, setSearchWord] = useState("");
+  const [visibleMovies, setVisibleMovies] = useState([]);
+  const [short, setShort] = useState(false);
 
   useEffect(() => {
-    setSearchWord(JSON.parse(localStorage.getItem("searchWord")) ?? '');
-    setVisibleFilms(JSON.parse(localStorage.getItem("searchedMovies")) ?? []);
-  }, []);
+    setSearchWord(JSON.parse(localStorage.getItem("searchWord")) ?? "");
+    setShort(JSON.parse(localStorage.getItem("isShort")) ?? false);
+    searchedMovies.length !== 0
+      ? setVisibleMovies(searchedMovies)
+      : setVisibleMovies(
+          JSON.parse(localStorage.getItem("searchedMovies")) ?? []
+        );
+  }, [searchedMovies]);
+
+  function searchShortMovies() {
+    setShort(!short);
+    localStorage.setItem("isShort", JSON.stringify(!short));
+  }
 
   const handleChange = (e) => {
     const { value } = e.target;
@@ -35,11 +45,13 @@ function Movies({
         searchWord={searchWord}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
+        short={short}
       />
       <MoviesCardList
-        visibleFilms={visibleFilms}
+        visibleMovies={visibleMovies}
         addMoreMovies={addMoreMovies}
         count={count}
+        short={short}
       />
     </section>
   );

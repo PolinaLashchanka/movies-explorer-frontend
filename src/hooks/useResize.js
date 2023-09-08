@@ -19,12 +19,6 @@ export const useResize = () => {
   const isScreenMd = width <= SCREEN_MD;
   const isScreenLg = width >= SCREEN_LG;
 
-  function setCountForScreenWidth() {
-    isScreenLg && setCount(12);
-    isScreenMd && setCount(8);
-    isScreenSm && setCount(5);
-  }
-
   function addMoreMovies() {
     isScreenLg && setCount(count + 3);
     isScreenMd && setCount(count + 2);
@@ -32,12 +26,17 @@ export const useResize = () => {
   }
 
   useEffect(() => {
-    setCountForScreenWidth();
+    isScreenLg && setCount(12);
+    isScreenMd && setCount(8);
+    isScreenSm && setCount(5);
   }, [isScreenSm, isScreenMd, isScreenLg]);
 
   return {
-    setCountForScreenWidth,
+    isScreenLg,
+    isScreenMd,
+    isScreenSm,
     addMoreMovies,
+    setCount,
     count,
   };
 };
