@@ -42,9 +42,9 @@ function App() {
 
   async function searchMovies(word) {
     try {
-      if (!word) {
-        throw new Error("введите слово");
-      }
+      // if (!word) {
+      //   throw new Error("введите слово");
+      // }
       const needToLoad = allMovies.length === 0;
       const result = needToLoad ? await initialSearch() : allMovies;
       const searchedMovies = await selectedSearch(result, word);

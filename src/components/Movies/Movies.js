@@ -3,15 +3,11 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import { useState, useEffect } from "react";
 
-function Movies({
-  searchedMovies,
-  searchMovies,
-  addMoreMovies,
-  count,
-}) {
+function Movies({ searchedMovies, searchMovies, addMoreMovies, count }) {
   const [searchWord, setSearchWord] = useState("");
   const [visibleMovies, setVisibleMovies] = useState([]);
   const [short, setShort] = useState(false);
+  const [className, setClassName] = useState("");
 
   useEffect(() => {
     setSearchWord(JSON.parse(localStorage.getItem("searchWord")) ?? "");
@@ -35,7 +31,11 @@ function Movies({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    searchMovies(searchWord);
+    if (searchWord === "") {
+      setClassName("visible");
+    } else {
+      searchMovies(searchWord);
+    }
   };
 
   return (
@@ -46,6 +46,8 @@ function Movies({
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         short={short}
+        className={className}
+        setClassName={setClassName}
       />
       <MoviesCardList
         visibleMovies={visibleMovies}

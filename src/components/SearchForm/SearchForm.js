@@ -6,32 +6,37 @@ function SearchForm({
   searchWord,
   handleChange,
   handleSubmit,
-  short
+  short,
+  className,
+  setClassName
 }) {
   return (
     <section className="search-form">
       <form className="search-form__form">
-        <input
-          id="input-film-search"
-          className="search-form__input"
-          name="searchWord"
-          type="text"
-          minLength="2"
-          maxLength="200"
-          placeholder="Фильм"
-          onChange={handleChange}
-          value={searchWord}
-          required
-        />
+        <div className="search-form__input-container">
+          <input
+            id="input-film-search"
+            className="search-form__input"
+            name="searchWord"
+            type="text"
+            minLength="2"
+            maxLength="200"
+            placeholder="Фильм"
+            onChange={handleChange}
+            value={searchWord}
+            required
+            onFocus={() => setClassName('')}
+          />
+          <button className="button search-form__button" onClick={handleSubmit}>
+            Поиск
+          </button>
+        </div>
         <span
           id="input-film-search-error"
-          className="search-form__input-error"
-        ></span>
-        <button className="button search-form__button" onClick={handleSubmit}>
-          Поиск
-        </button>
+          className={`search-form__input-error ${className}`}
+        >Нужно ввести ключевое слово</span>
       </form>
-      <FilterCheckbox searchShortMovies={searchShortMovies} short={short}/>
+      <FilterCheckbox searchShortMovies={searchShortMovies} short={short} />
     </section>
   );
 }
