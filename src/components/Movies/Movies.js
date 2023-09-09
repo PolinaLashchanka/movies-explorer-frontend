@@ -51,7 +51,7 @@ function Movies({ searchedMovies, searchMovies, addMoreMovies, count, isLoading,
         setClassName={setClassName}
       />
       {isLoading && <Preloader />}
-      {searchedMovies.length === 0 ? (<h2 className="movies__no-result-message">{noMoviesMessage}</h2>) : (<MoviesCardList
+      {visibleMovies.length === 0 ? (<h2 className="movies__no-result-message">{noMoviesMessage}</h2>) : (<MoviesCardList
         visibleMovies={visibleMovies}
         addMoreMovies={addMoreMovies}
         count={count}
