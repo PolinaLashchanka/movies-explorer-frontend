@@ -1,9 +1,10 @@
 import "./Movies.css";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import Preloader from "../Preloader/Preloader";
 import { useState, useEffect } from "react";
 
-function Movies({ searchedMovies, searchMovies, addMoreMovies, count }) {
+function Movies({ searchedMovies, searchMovies, addMoreMovies, count, isLoading, noMoviesMessage }) {
   const [searchWord, setSearchWord] = useState("");
   const [visibleMovies, setVisibleMovies] = useState([]);
   const [short, setShort] = useState(false);
@@ -49,12 +50,13 @@ function Movies({ searchedMovies, searchMovies, addMoreMovies, count }) {
         className={className}
         setClassName={setClassName}
       />
-      <MoviesCardList
+      {isLoading && <Preloader />}
+      {searchedMovies.length === 0 ? (<h2 className="movies__no-result-message">{noMoviesMessage}</h2>) : (<MoviesCardList
         visibleMovies={visibleMovies}
         addMoreMovies={addMoreMovies}
         count={count}
         short={short}
-      />
+      />)}
     </section>
   );
 }

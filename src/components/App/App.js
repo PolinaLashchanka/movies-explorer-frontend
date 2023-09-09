@@ -17,6 +17,8 @@ import { useResize } from "../../hooks/useResize";
 function App() {
   const [allMovies, setAllMovies] = useState([]);
   const [searchedMovies, setSearchedMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [noMoviesMessage, setNoMoviesMessage] = useState("");
 
   const { isScreenLg, isScreenMd, isScreenSm, addMoreMovies, setCount, count } =
     useResize();
@@ -31,8 +33,8 @@ function App() {
     const word = searchWord.toLowerCase();
     const searchedMovies = result.filter((movie) => {
       return (
-        (movie.nameRU.toLowerCase().includes(word) ||
-          movie.nameEN.toLowerCase().includes(word))
+        movie.nameRU.toLowerCase().includes(word) ||
+        movie.nameEN.toLowerCase().includes(word)
       );
     });
     localStorage.setItem("searchedMovies", JSON.stringify(searchedMovies));
@@ -40,20 +42,32 @@ function App() {
     return searchedMovies;
   }
 
+  function noMoviesFound() {
+    setNoMoviesMessage("Ничего не найдено.");
+    setSearchedMovies([]);
+  }
+
+  function moviesFound(movies) {
+    setNoMoviesMessage("");
+    setSearchedMovies(movies);
+  }
+
   async function searchMovies(word) {
     try {
-      // if (!word) {
-      //   throw new Error("введите слово");
-      // }
+      setIsLoading(true);
       const needToLoad = allMovies.length === 0;
       const result = needToLoad ? await initialSearch() : allMovies;
       const searchedMovies = await selectedSearch(result, word);
-      setSearchedMovies(searchedMovies);
+      searchedMovies.length === 0
+        ? noMoviesFound()
+        : moviesFound(searchedMovies);
       isScreenLg && setCount(12);
       isScreenMd && setCount(8);
       isScreenSm && setCount(5);
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -70,6 +84,8 @@ function App() {
               searchMovies={searchMovies}
               addMoreMovies={addMoreMovies}
               count={count}
+              isLoading={isLoading}
+              noMoviesMessage={noMoviesMessage}
             />
           }
         />
