@@ -24,9 +24,15 @@ function App() {
     useResize();
 
   async function initialSearch() {
-    const moviesFromApi = await moviesApi.getFilms();
-    setAllMovies(moviesFromApi);
-    return moviesFromApi;
+    try {
+      const moviesFromApi = await moviesApi.getFilms();
+      setAllMovies(moviesFromApi);
+      return moviesFromApi;
+    } catch (err) {
+      setNoMoviesMessage(
+        "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
+      );
+    }
   }
 
   async function selectedSearch(result, searchWord) {
