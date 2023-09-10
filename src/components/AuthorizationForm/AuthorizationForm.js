@@ -13,6 +13,9 @@ function AuthorizationForm({
   name,
   email,
   password,
+  handleSubmit,
+  serverError,
+  setServerError,
 }) {
   const hidden = `${path === "/signup" ? "hidden" : ""}`;
   const [formValid, setFormValid] = useState(false);
@@ -35,9 +38,7 @@ function AuthorizationForm({
     if (value === "") {
       setErrorNameValue("Это поле не может быть пустым");
     } else if (value.length < 2 || value.length > 30) {
-      setErrorNameValue(
-        "Имя должно быть не менее 2 и не больше 30 символов"
-      );
+      setErrorNameValue("Имя должно быть не менее 2 и не больше 30 символов");
     } else if (value.match(reg)) {
       setErrorNameValue(
         "Это поле может содержать только латиницу, кириллицу, пробелы и тире"
@@ -89,12 +90,16 @@ function AuthorizationForm({
   }, [errorNameValue, errorEmailValue, errorPasswordValue]);
 
   return (
-    <form className="form" noValidate>
+    <form className="form" noValidate onSubmit={handleSubmit}>
       <Link to="/" className="form__logo">
         <img src={logo} alt="логотип" />
       </Link>
       <h2 className="form__header">{header}</h2>
-      <div className="form__input-container">
+      <div
+        className={`form__input-container ${
+          path === "/signup" ? "form__input-container_margin" : ""
+        }`}
+      >
         <label htmlFor="authorization-name" className={`form__label ${hidden}`}>
           Имя
         </label>
@@ -109,6 +114,7 @@ function AuthorizationForm({
           onBlur={(e) => checkError(e, handleNameErrorMessage, setNameClass)}
           onFocus={() => {
             setNameClass("");
+            setServerError("");
           }}
           value={name}
           required
@@ -133,6 +139,7 @@ function AuthorizationForm({
           onBlur={(e) => checkError(e, handleEmailErrorMessage, setEmailClass)}
           onFocus={() => {
             setEmailClass("");
+            setServerError("");
           }}
           value={email}
           required
@@ -154,9 +161,12 @@ function AuthorizationForm({
           type="password"
           name="password"
           onChange={(e) => handleChange(e, handlePasswordErrorMessage)}
-          onBlur={(e) => checkError(e, handlePasswordErrorMessage, setPasswordClass)}
+          onBlur={(e) =>
+            checkError(e, handlePasswordErrorMessage, setPasswordClass)
+          }
           onFocus={() => {
             setPasswordClass("");
+            setServerError("");
           }}
           value={password}
           required
@@ -169,18 +179,22 @@ function AuthorizationForm({
         </span>
       </div>
       <div className="form__button-container">
+        <h2 className="server-error">{serverError ? serverError : ""}</h2>
         <button
+          type="submit"
           disabled={!formValid}
-          className={`button form__button ${
-            path === "/signup" ? "form__button_margin" : ""
-          }`}
+          className="button form__button"
         >
           {buttonName}
         </button>
         <p className="form__text">
           {formText}
           <span>
-            <Link to={path} className="form__link link">
+            <Link
+              to={path}
+              className="form__link link"
+              onClick={() => setServerError("")}
+            >
               {linkText}
             </Link>
           </span>

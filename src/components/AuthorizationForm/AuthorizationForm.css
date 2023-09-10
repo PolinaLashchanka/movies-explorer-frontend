@@ -19,6 +19,7 @@
 .form__input-container {
     display: flex;
     flex-direction: column;
+    margin-bottom: 107px;
 }
 
 .form__label {
@@ -59,10 +60,6 @@
     color: red;
 }
 
-.form__button {
-    margin-top: 132px;
-}
-
 .form__text {
     color: #8B8B8B;
     font-size: 14px;
@@ -80,8 +77,8 @@
     display: none;
 }
 
-.form__button_margin {
-    margin-top: 202px;
+.form__input-container_margin {
+    margin-bottom: 176px;
 }
 
 button:disabled {
@@ -92,6 +89,14 @@ button:disabled {
 
 button:disabled:hover {
     opacity: 1;
+}
+
+.server-error {
+    color: red;
+    font-size: 14px;
+    font-weight: 400;
+    height: 16px;
+    margin: 0 0 10px;
 }
 
 @media (max-width: 768px) {
@@ -115,8 +120,8 @@ button:disabled:hover {
         padding: 0 30px;
     }
 
-    .form__button {
-        margin-top: 219px;
+    .form__input-container {
+        margin-bottom: 192px;
     }
 
     .form__text {
@@ -124,7 +129,7 @@ button:disabled:hover {
         margin-top: 14px;
     }
 
-    .form__button_margin {
-        margin-top: 288px;
+    .form__input-container_margin {
+        margin-bottom: 262px;
     }
 }

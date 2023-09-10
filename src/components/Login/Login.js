@@ -1,7 +1,7 @@
 import AuthorizationForm from "../AuthorizationForm/AuthorizationForm";
 import { useState } from "react";
 
-function Login() {
+function Login({onHandleLogin, serverError, setServerError}) {
 
   const [formValue, setFormValue] = useState({
     email: "",
@@ -16,6 +16,12 @@ function Login() {
 
   const { email, password } = formValue;
 
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onHandleLogin(email, password);
+  };
+
   return (
     <section className="authorization login">
       <AuthorizationForm
@@ -27,6 +33,9 @@ function Login() {
         handleChange={handleChange}
         email={email}
         password={password}
+        handleSubmit={handleSubmit}
+        serverError={serverError}
+        setServerError={setServerError}
       />
     </section>
   );

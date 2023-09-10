@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -11,14 +11,18 @@ import Footer from "../Footer/Footer";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import { savedFilms } from "../../utils/constants";
 import moviesApi from "../../utils/MoviesApi";
+import * as mainApi from "../../utils/MainApi";
 import { useState } from "react";
 import { useResize } from "../../hooks/useResize";
 
 function App() {
+  const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState({});
   const [allMovies, setAllMovies] = useState([]);
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [noMoviesMessage, setNoMoviesMessage] = useState("");
+  const [ serverError, setServerError ] = useState('');
 
   const { isScreenLg, isScreenMd, isScreenSm, addMoreMovies, setCount, count } =
     useResize();
@@ -77,6 +81,41 @@ function App() {
     }
   }
 
+  function onHandleRegister(name, email, password) {
+    mainApi
+      .register(name, email, password)
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem("jwt", data.token);
+          const { token, ...rest } = data;
+          setCurrentUser(rest);
+          // handleLogin(email);
+          navigate("/movies");
+          setServerError('');
+        }
+      })
+      .catch((err) => {
+        setServerError(err.message);
+      });
+  }
+
+  function onHandleLogin(email, password) {
+    mainApi
+      .authorize(email, password)
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem("jwt", data.token);
+          const { token, ...rest } = data;
+          setCurrentUser(rest);
+          // handleLogin(email);
+          navigate("/movies");
+        }
+      })
+      .catch((err) => {
+        setServerError(err.message);
+      });
+  }
+
   return (
     <div className="page">
       <Header />
@@ -100,8 +139,14 @@ function App() {
           element={<SavedMovies visibleFilms={savedFilms} />}
         />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/signup" element={<Register />} />
-        <Route path="/signin" element={<Login />} />
+        <Route
+          path="/signup"
+          element={<Register onHandleRegister={onHandleRegister} serverError={serverError} setServerError={setServerError}/>}
+        />
+        <Route
+          path="/signin"
+          element={<Login onHandleLogin={onHandleLogin} serverError={serverError} setServerError={setServerError}/>}
+        />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
       <Footer />
