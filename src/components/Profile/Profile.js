@@ -1,8 +1,11 @@
+import React from "react";
+import { CurrentUserContext } from "../../context/CurrentUserContext";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Profile.css";
 
 function Profile() {
+  const currentUser = React.useContext(CurrentUserContext);
   const [edit, setEdit] = useState(false);
 
   function editProfile() {
@@ -17,7 +20,7 @@ function Profile() {
           id="edit-name"
           className="profile__form-input "
           type="text"
-          defaultValue="Полина"
+          value={currentUser.name}
           name="profile-name"
           minLength="2"
           maxLength="200"
@@ -31,7 +34,7 @@ function Profile() {
           id="edit-email"
           className="profile__form-input"
           type="text"
-          defaultValue="pochta@yandex.ru"
+          value={currentUser.email}
           name="profile-email"
           minLength="2"
           maxLength="200"

@@ -24,14 +24,14 @@ export function authorize(email, password) {
     },
     body: JSON.stringify({ email, password }),
   });
-};
+}
 
-// export function checkToken(token) {
-//   return request(`${BASE_URL}/users/me`, {
-//     method: "GET",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ${token}`,
-//     },
-//   });
-// };
+export function checkToken(token) {
+  return request(`${BASE_URL}/users/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}

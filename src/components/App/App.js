@@ -1,5 +1,6 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
+import { CurrentUserContext } from "../../context/CurrentUserContext";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
@@ -12,7 +13,7 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 import { savedFilms } from "../../utils/constants";
 import moviesApi from "../../utils/MoviesApi";
 import * as mainApi from "../../utils/MainApi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useResize } from "../../hooks/useResize";
 
 function App() {
@@ -22,10 +23,27 @@ function App() {
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [noMoviesMessage, setNoMoviesMessage] = useState("");
-  const [ serverError, setServerError ] = useState('');
+  const [serverError, setServerError] = useState("");
 
   const { isScreenLg, isScreenMd, isScreenSm, addMoreMovies, setCount, count } =
     useResize();
+
+  function tokenCheck() {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      mainApi
+        .checkToken(jwt)
+        .then((res) => {
+          setCurrentUser(res);
+          // navigate("/movies");
+        })
+        .catch(console.error);
+    }
+  }
+
+  useEffect(() => {
+    tokenCheck();
+  }, []);
 
   async function initialSearch() {
     try {
@@ -91,7 +109,7 @@ function App() {
           setCurrentUser(rest);
           // handleLogin(email);
           navigate("/movies");
-          setServerError('');
+          setServerError("");
         }
       })
       .catch((err) => {
@@ -118,38 +136,52 @@ function App() {
 
   return (
     <div className="page">
-      <Header />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route
-          path="/movies"
-          element={
-            <Movies
-              searchedMovies={searchedMovies}
-              searchMovies={searchMovies}
-              addMoreMovies={addMoreMovies}
-              count={count}
-              isLoading={isLoading}
-              noMoviesMessage={noMoviesMessage}
-            />
-          }
-        />
-        <Route
-          path="/saved-movies"
-          element={<SavedMovies visibleFilms={savedFilms} />}
-        />
-        <Route path="/profile" element={<Profile />} />
-        <Route
-          path="/signup"
-          element={<Register onHandleRegister={onHandleRegister} serverError={serverError} setServerError={setServerError}/>}
-        />
-        <Route
-          path="/signin"
-          element={<Login onHandleLogin={onHandleLogin} serverError={serverError} setServerError={setServerError}/>}
-        />
-        <Route path="/*" element={<PageNotFound />} />
-      </Routes>
-      <Footer />
+      <CurrentUserContext.Provider value={currentUser}>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route
+            path="/movies"
+            element={
+              <Movies
+                searchedMovies={searchedMovies}
+                searchMovies={searchMovies}
+                addMoreMovies={addMoreMovies}
+                count={count}
+                isLoading={isLoading}
+                noMoviesMessage={noMoviesMessage}
+              />
+            }
+          />
+          <Route
+            path="/saved-movies"
+            element={<SavedMovies visibleFilms={savedFilms} />}
+          />
+          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/signup"
+            element={
+              <Register
+                onHandleRegister={onHandleRegister}
+                serverError={serverError}
+                setServerError={setServerError}
+              />
+            }
+          />
+          <Route
+            path="/signin"
+            element={
+              <Login
+                onHandleLogin={onHandleLogin}
+                serverError={serverError}
+                setServerError={setServerError}
+              />
+            }
+          />
+          <Route path="/*" element={<PageNotFound />} />
+        </Routes>
+        <Footer />
+      </CurrentUserContext.Provider>
     </div>
   );
 }
