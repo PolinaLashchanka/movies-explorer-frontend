@@ -19,18 +19,33 @@ function AuthorizationForm({
   const [nameClass, setNameClass] = useState("");
   const [emailClass, setEmailClass] = useState("");
   const [passwordClass, setPasswordClass] = useState("");
+  const [errorNameValue, setErrorNameValue] = useState(
+    `${path === "/signup" ? "" : "Это поле не может быть пустым"}`
+  );
   const [errorEmailValue, setErrorEmailValue] = useState(
     "Это поле не может быть пустым"
   );
-  const [errorValue, setErrorValue] = useState({
-    nameError: `${path === '/signup' ? "" : "Это поле не может быть пустым"}`,
-    passwordError: "Это поле не может быть пустым",
-  });
+  const [errorPasswordValue, setErrorPasswordValue] = useState(
+    "Это поле не может быть пустым"
+  );
 
-  const handleErrorMessage = async (e) => {
-    const { name, validationMessage } = e.target;
-    setErrorValue({ ...errorValue, [`${name}Error`]: validationMessage });
-    return validationMessage;
+  const handleNameErrorMessage = async (e) => {
+    const { value } = e.target;
+    const reg = /[^a-zа-яё -]/gi;
+    if (value === "") {
+      setErrorNameValue("Это поле не может быть пустым");
+    } else if (value.length < 2 || value.length > 30) {
+      setErrorNameValue(
+        "Имя должно быть не менее 2 и не больше 30 символов"
+      );
+    } else if (value.match(reg)) {
+      setErrorNameValue(
+        "Это поле может содержать только латиницу, кириллицу, пробелы и тире"
+      );
+    } else {
+      setErrorNameValue("");
+    }
+    return errorNameValue;
   };
 
   const handleEmailErrorMessage = async (e) => {
@@ -47,33 +62,31 @@ function AuthorizationForm({
     return errorEmailValue;
   };
 
-  function checkNameError(e) {
-    handleErrorMessage(e).then((message) => {
-      message === "" ? setNameClass("") : setNameClass("visible");
+  const handlePasswordErrorMessage = async (e) => {
+    const { value } = e.target;
+    if (value === "") {
+      setErrorPasswordValue("Это поле не может быть пустым");
+    } else if (value.length < 5) {
+      setErrorPasswordValue("Пароль должен быть не менее 5 символов");
+    } else {
+      setErrorPasswordValue("");
+    }
+    return errorPasswordValue;
+  };
+
+  function checkError(e, func, setter) {
+    func(e).then((message) => {
+      message === "" ? setter("") : setter("visible");
     });
   }
-
-  function checkEmailError(e) {
-    handleEmailErrorMessage(e).then((message) => {
-      message === "" ? setEmailClass("") : setEmailClass("visible");
-    });
-  }
-
-  function checkPasswordError(e) {
-    handleErrorMessage(e).then((message) => {
-      message === "" ? setPasswordClass("") : setPasswordClass("visible");
-    });
-  }
-
-  const { nameError, passwordError } = errorValue;
 
   useEffect(() => {
-    if (nameError || errorEmailValue || passwordError) {
+    if (errorNameValue || errorEmailValue || errorPasswordValue) {
       setFormValid(false);
     } else {
       setFormValid(true);
     }
-  }, [nameError, errorEmailValue, passwordError]);
+  }, [errorNameValue, errorEmailValue, errorPasswordValue]);
 
   return (
     <form className="form" noValidate>
@@ -92,10 +105,8 @@ function AuthorizationForm({
           }`}
           type="text"
           name="name"
-          minLength="2"
-          maxLength="200"
-          onChange={(e) => handleChange(e, handleErrorMessage)}
-          onBlur={checkNameError}
+          onChange={(e) => handleChange(e, handleNameErrorMessage)}
+          onBlur={(e) => checkError(e, handleNameErrorMessage, setNameClass)}
           onFocus={() => {
             setNameClass("");
           }}
@@ -106,7 +117,7 @@ function AuthorizationForm({
           id="authorization-name-error"
           className={`error form__input-error ${hidden} ${nameClass}`}
         >
-          {nameError}
+          {errorNameValue}
         </span>
         <label htmlFor="authorization-email" className="form__label">
           E-mail
@@ -119,7 +130,7 @@ function AuthorizationForm({
           type="email"
           name="email"
           onChange={(e) => handleChange(e, handleEmailErrorMessage)}
-          onBlur={checkEmailError}
+          onBlur={(e) => checkError(e, handleEmailErrorMessage, setEmailClass)}
           onFocus={() => {
             setEmailClass("");
           }}
@@ -142,10 +153,8 @@ function AuthorizationForm({
           }`}
           type="password"
           name="password"
-          minLength="5"
-          maxLength="200"
-          onChange={(e) => handleChange(e, handleErrorMessage)}
-          onBlur={checkPasswordError}
+          onChange={(e) => handleChange(e, handlePasswordErrorMessage)}
+          onBlur={(e) => checkError(e, handlePasswordErrorMessage, setPasswordClass)}
           onFocus={() => {
             setPasswordClass("");
           }}
@@ -156,7 +165,7 @@ function AuthorizationForm({
           id="authorization-password-error"
           className={`error form__input-error ${passwordClass}`}
         >
-          {passwordError}
+          {errorPasswordValue}
         </span>
       </div>
       <div className="form__button-container">
