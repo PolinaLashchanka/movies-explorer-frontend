@@ -150,6 +150,13 @@ function App() {
       });
   }
 
+  function onSignOut() {
+    localStorage.clear();
+    setCurrentUser({});
+    setLoggedIn(false);
+    navigate('/');
+  }
+
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -180,7 +187,7 @@ function App() {
           />
           <Route
             path="/profile"
-            element={<ProtectedRoute element={Profile} loggedIn={loggedIn} />}
+            element={<ProtectedRoute element={Profile} loggedIn={loggedIn} onSignOut={onSignOut}/>}
           />
           <Route
             path="/signup"

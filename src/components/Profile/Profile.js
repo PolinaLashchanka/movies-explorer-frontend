@@ -1,16 +1,33 @@
 import React from "react";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Profile.css";
 
-function Profile() {
+function Profile({ onSignOut }) {
   const currentUser = React.useContext(CurrentUserContext);
   const [edit, setEdit] = useState(false);
+  const [nameValue, setNameValue] = useState(currentUser.name);
+  const [emailValue, setEmailValue] = useState(currentUser.email);
+  const [disabledButton, setDisabledBitton] = useState(true);
+
+  const handleNameChange = (e) => {
+    const { value } = e.target;
+    setNameValue(value);
+  };
+
+  const handleEmailChange = (e) => {
+    const { value } = e.target;
+    setEmailValue(value);
+  };
 
   function editProfile() {
     setEdit(true);
   }
+
+  useEffect(() => {
+    nameValue === currentUser.name && emailValue === currentUser.email ? setDisabledBitton(true) : setDisabledBitton(false);
+  }, [nameValue, emailValue])
 
   return (
     <section className="profile">
@@ -20,11 +37,13 @@ function Profile() {
           id="edit-name"
           className="profile__form-input "
           type="text"
-          value={currentUser.name}
-          name="profile-name"
+          value={nameValue}
+          onChange={handleNameChange}
+          name="name"
           minLength="2"
           maxLength="200"
           required
+          disabled={!edit}
         />
         <span
           id="edit-name-error"
@@ -34,11 +53,13 @@ function Profile() {
           id="edit-email"
           className="profile__form-input"
           type="text"
-          value={currentUser.email}
-          name="profile-email"
+          value={emailValue}
+          onChange={handleEmailChange}
+          name="email"
           minLength="2"
           maxLength="200"
           required
+          disabled={!edit}
         />
         <span
           id="edit-email-error"
@@ -52,12 +73,22 @@ function Profile() {
             >
               Редактировать
             </button>
-              <Link to="/" replace className="profile__exit-button link">
-                Выйти из аккаунта
-              </Link>
+            <Link
+              onClick={onSignOut}
+              to="/"
+              replace
+              className="profile__exit-button link"
+            >
+              Выйти из аккаунта
+            </Link>
           </>
         ) : (
-          <button className="button profile__save-button">Сохранить</button>
+          <button
+            className="button profile__save-button"
+            disabled={disabledButton}
+          >
+            Сохранить
+          </button>
         )}
       </form>
     </section>
