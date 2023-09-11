@@ -1,6 +1,7 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import "./App.css";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
+import ProtectedRoute from "../ProtectedRoute";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
@@ -10,7 +11,6 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Footer from "../Footer/Footer";
 import PageNotFound from "../PageNotFound/PageNotFound";
-import { savedFilms } from "../../utils/constants";
 import moviesApi from "../../utils/MoviesApi";
 import * as mainApi from "../../utils/MainApi";
 import { useEffect, useState } from "react";
@@ -18,15 +18,33 @@ import { useResize } from "../../hooks/useResize";
 
 function App() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const path = location.pathname;
   const [currentUser, setCurrentUser] = useState({});
   const [allMovies, setAllMovies] = useState([]);
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [noMoviesMessage, setNoMoviesMessage] = useState("");
   const [serverError, setServerError] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const { isScreenLg, isScreenMd, isScreenSm, addMoreMovies, setCount, count } =
     useResize();
+
+  function handleLogin(user) {
+    setCurrentUser(user);
+    setLoggedIn(true);
+  }
+
+  function handlePath() {
+    if (path === "/movies") {
+      navigate("/movies");
+    } else if (path === "/profile") {
+      navigate("/profile");
+    } else if (path === "/" || path === "/signup" || path === "/signin") {
+      navigate("/");
+    }
+  }
 
   function tokenCheck() {
     const jwt = localStorage.getItem("jwt");
@@ -34,8 +52,8 @@ function App() {
       mainApi
         .checkToken(jwt)
         .then((res) => {
-          setCurrentUser(res);
-          // navigate("/movies");
+          handleLogin(res);
+          handlePath();
         })
         .catch(console.error);
     }
@@ -106,8 +124,7 @@ function App() {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
           const { token, ...rest } = data;
-          setCurrentUser(rest);
-          // handleLogin(email);
+          handleLogin(rest);
           navigate("/movies");
           setServerError("");
         }
@@ -124,8 +141,7 @@ function App() {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
           const { token, ...rest } = data;
-          setCurrentUser(rest);
-          // handleLogin(email);
+          handleLogin(rest);
           navigate("/movies");
         }
       })
@@ -137,13 +153,15 @@ function App() {
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
-        <Header />
+        <Header loggedIn={loggedIn}/>
         <Routes>
           <Route path="/" element={<Main />} />
           <Route
             path="/movies"
             element={
-              <Movies
+              <ProtectedRoute
+                element={Movies}
+                loggedIn={loggedIn}
                 searchedMovies={searchedMovies}
                 searchMovies={searchMovies}
                 addMoreMovies={addMoreMovies}
@@ -153,11 +171,17 @@ function App() {
               />
             }
           />
+
           <Route
             path="/saved-movies"
-            element={<SavedMovies visibleFilms={savedFilms} />}
+            element={
+              <ProtectedRoute element={SavedMovies} loggedIn={loggedIn} />
+            }
           />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={<ProtectedRoute element={Profile} loggedIn={loggedIn} />}
+          />
           <Route
             path="/signup"
             element={

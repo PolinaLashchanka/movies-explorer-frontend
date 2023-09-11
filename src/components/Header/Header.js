@@ -5,7 +5,7 @@ import logo from "../../images/logo.svg";
 import icon from "../../images/icon__COLOR_icon-main.svg";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
-function Header() {
+function Header({loggedIn}) {
   const location = useLocation();
   const path = location.pathname;
 
@@ -21,7 +21,7 @@ function Header() {
 
   return (
     <>
-      {path === "/" && (
+      {path === "/" && !loggedIn && (
         <header className="header header_main">
           {logoLink}
           <div className="header__link-container">
@@ -38,10 +38,8 @@ function Header() {
           </div>
         </header>
       )}
-      {(path === "/saved-movies" ||
-        path === "/movies" ||
-        path === "/profile") && (
-        <header className="header">
+      {loggedIn && (
+        <header className={`header ${path === '/' && 'header_main'}`}>
           {logoLink}
           <div className={`header__burger-overlay ${active}`}></div>
           <div className={`header__link-container header__link-burger-container ${active}`}>
@@ -58,7 +56,7 @@ function Header() {
             <Link onClick={closeNav} to="/profile" className="header__link header__burger-link link" style={path === "/profile" ? {fontWeight: 500} : {}}>
                 <p className="header__profile-text">Аккаунт</p>
                 <img
-                  className="header__profile-icon"
+                  className={`header__profile-icon ${path === '/' && 'header__profile-icon_main'}`}
                   src={icon}
                   alt="profile icon"
                 />

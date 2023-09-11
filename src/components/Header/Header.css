@@ -67,6 +67,10 @@
     margin-left: 13px;
 }
 
+.header__profile-icon_main {
+    background-color: #3DDC84;
+}
+
 .header__burger-btn {
     display: none;
 }
