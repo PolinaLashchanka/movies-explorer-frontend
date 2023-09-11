@@ -7,18 +7,29 @@ function request(url, options) {
 }
 
 
-// function getHeaders() {
-//   return {
-//     "Content-Type": "application/json",
-//     Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-//   };
-// }
+function getHeaders() {
+  return {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+  };
+}
 
 // export function getUserInfo() {
 //   return request(`${BASE_URL}/users/me`, {
 //     headers: getHeaders(),
 //   });
 // }
+
+export function editProfile(userName, userEmail) {
+  return request(`${BASE_URL}/users/me`, {
+    method: "PATCH",
+    headers: getHeaders(),
+    body: JSON.stringify({
+      name: userName,
+      email: userEmail,
+    }),
+  });
+}
 
 
 export function register(name, email, password) {

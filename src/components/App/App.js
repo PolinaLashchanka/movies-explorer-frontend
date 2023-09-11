@@ -27,6 +27,8 @@ function App() {
   const [noMoviesMessage, setNoMoviesMessage] = useState("");
   const [serverError, setServerError] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [editMessage, setEditMessage] = useState("");
 
   const { isScreenLg, isScreenMd, isScreenSm, addMoreMovies, setCount, count } =
     useResize();
@@ -150,17 +152,33 @@ function App() {
       });
   }
 
+  function onHandleProfileChange(email, password) {
+    mainApi
+      .editProfile(email, password)
+      .then((user) => {
+        setCurrentUser(user);
+        setEdit(false);
+        setEditMessage('Данные пользователя успешно изменены!')
+      })
+      .catch(() => setEditMessage('При обновлении профиля произошла ошибка.'));
+  }
+
+  function editProfile() {
+    setEdit(true);
+    setEditMessage("");
+  }
+
   function onSignOut() {
     localStorage.clear();
     setCurrentUser({});
     setLoggedIn(false);
-    navigate('/');
+    navigate("/");
   }
 
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
-        <Header loggedIn={loggedIn}/>
+        <Header loggedIn={loggedIn} setEdit={setEdit}/>
         <Routes>
           <Route path="/" element={<Main />} />
           <Route
@@ -187,7 +205,18 @@ function App() {
           />
           <Route
             path="/profile"
-            element={<ProtectedRoute element={Profile} loggedIn={loggedIn} onSignOut={onSignOut}/>}
+            element={
+              <ProtectedRoute
+                element={Profile}
+                loggedIn={loggedIn}
+                onSignOut={onSignOut}
+                path={"/profile"}
+                onHandleProfileChange={onHandleProfileChange}
+                editProfile={editProfile}
+                edit={edit}
+                editMessage={editMessage}
+              />
+            }
           />
           <Route
             path="/signup"
