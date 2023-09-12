@@ -5,7 +5,7 @@ import logo from "../../images/logo.svg";
 import icon from "../../images/icon__COLOR_icon-main.svg";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
-function Header({ loggedIn, setEdit }) {
+function Header({ loggedIn, setEdit, setEditMessage }) {
   const location = useLocation();
   const path = location.pathname;
 
@@ -20,6 +20,7 @@ function Header({ loggedIn, setEdit }) {
   const closeNav = () => {
     setNav(!nav);
     setEdit(false);
+    setEditMessage('');
   };
 
   return (

@@ -178,7 +178,7 @@ function App() {
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
-        <Header loggedIn={loggedIn} setEdit={setEdit}/>
+        <Header loggedIn={loggedIn} setEdit={setEdit} setEditMessage={setEditMessage}/>
         <Routes>
           <Route path="/" element={<Main />} />
           <Route

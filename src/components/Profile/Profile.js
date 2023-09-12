@@ -34,7 +34,7 @@ function Profile({ onSignOut, path, onHandleProfileChange, editProfile, edit, ed
     nameValue === currentUser.name && emailValue === currentUser.email
       ? setDisabledBitton(true)
       : setDisabledBitton(false);
-  }, [nameValue, emailValue]);
+  }, [nameValue, emailValue, currentUser.name, currentUser.email]);
 
   function handleSubmit(e) {
     e.preventDefault();
