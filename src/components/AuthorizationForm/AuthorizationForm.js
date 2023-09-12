@@ -18,20 +18,20 @@ function AuthorizationForm({
   serverError,
   setServerError,
 }) {
-  const [nameClass, setNameClass] = useState("");
-  const [emailClass, setEmailClass] = useState("");
-  const [passwordClass, setPasswordClass] = useState("");
+  const [isNameDirty, setIsNameDirty] = useState(false);
+  const [isEmailDirty, setIsEmailDirty] = useState(false);
+  const [isPasswordDirty, setIsPasswordDirty] = useState(false);
 
   const {
     hidden,
     handleNameErrorMessage,
     handleEmailErrorMessage,
     handlePasswordErrorMessage,
-    checkError,
     errorNameValue,
     errorEmailValue,
     errorPasswordValue,
     formValid,
+    isDirty,
   } = useValidationError(path);
 
   return (
@@ -51,14 +51,13 @@ function AuthorizationForm({
         <input
           id="authorization-name"
           className={`form__input ${hidden} ${
-            nameClass === "visible" ? `form__input_red` : ""
+            errorNameValue && isNameDirty && "form__input_red"
           }`}
           type="text"
           name="name"
           onChange={(e) => handleChange(e, handleNameErrorMessage)}
-          onBlur={(e) => checkError(e, handleNameErrorMessage, setNameClass)}
+          onBlur={() => isDirty(setIsNameDirty)}
           onFocus={() => {
-            setNameClass("");
             setServerError("");
           }}
           value={name}
@@ -66,7 +65,9 @@ function AuthorizationForm({
         />
         <span
           id="authorization-name-error"
-          className={`error form__input-error ${hidden} ${nameClass}`}
+          className={`error form__input-error ${hidden} ${
+            isNameDirty && "visible"
+          }`}
         >
           {errorNameValue}
         </span>
@@ -76,14 +77,13 @@ function AuthorizationForm({
         <input
           id="authorization-email"
           className={`form__input ${
-            emailClass !== "" ? `form__input_red` : ""
+            errorEmailValue && isEmailDirty && "form__input_red"
           }`}
           type="email"
           name="email"
           onChange={(e) => handleChange(e, handleEmailErrorMessage)}
-          onBlur={(e) => checkError(e, handleEmailErrorMessage, setEmailClass)}
+          onBlur={() => isDirty(setIsEmailDirty)}
           onFocus={() => {
-            setEmailClass("");
             setServerError("");
           }}
           value={email}
@@ -91,7 +91,7 @@ function AuthorizationForm({
         />
         <span
           id="authorization-email-error"
-          className={`error form__input-error ${emailClass}`}
+          className={`error form__input-error ${isEmailDirty && "visible"}`}
         >
           {errorEmailValue}
         </span>
@@ -101,16 +101,13 @@ function AuthorizationForm({
         <input
           id="authorization-password"
           className={`form__input ${
-            passwordClass !== "" ? `form__input_red` : ""
+            errorPasswordValue && isPasswordDirty && "form__input_red"
           }`}
           type="password"
           name="password"
           onChange={(e) => handleChange(e, handlePasswordErrorMessage)}
-          onBlur={(e) =>
-            checkError(e, handlePasswordErrorMessage, setPasswordClass)
-          }
+          onBlur={() => isDirty(setIsPasswordDirty)}
           onFocus={() => {
-            setPasswordClass("");
             setServerError("");
           }}
           value={password}
@@ -118,7 +115,7 @@ function AuthorizationForm({
         />
         <span
           id="authorization-password-error"
-          className={`error form__input-error ${passwordClass}`}
+          className={`error form__input-error ${isPasswordDirty && "visible"}`}
         >
           {errorPasswordValue}
         </span>

@@ -6,13 +6,15 @@ export const useValidationError = (path) => {
   const [errorNameValue, setErrorNameValue] = useState(
     `${path === "/signup" || path === "/profile" ? "" : "Это поле не может быть пустым"}`
   );
-//   const [errorEmailValue, setErrorEmailValue] = useState(
-//     `${path === "/profile" ? "" : "Это поле не может быть пустым"}`
-//   );
-  const [errorEmailValue, setErrorEmailValue] = useState("");
+  const [errorEmailValue, setErrorEmailValue] = useState(
+    `${path === "/profile" ? "" : "Это поле не может быть пустым"}`
+  );
   const [errorPasswordValue, setErrorPasswordValue] = useState(
     `${path === "/profile" ? "" : "Это поле не может быть пустым"}`
   );
+
+
+
 
   const handleNameErrorMessage = async (e) => {
     const { value } = e.target;
@@ -30,6 +32,10 @@ export const useValidationError = (path) => {
     }
     return errorNameValue;
   };
+
+  function isDirty(setter) {
+    setter(true);
+  }
 
   const handleEmailErrorMessage = async (e) => {
     const { value } = e.target;
@@ -57,12 +63,6 @@ export const useValidationError = (path) => {
     return errorPasswordValue;
   };
 
-  function checkError(e, func, setter) {
-    func(e).then((message) => {
-      message === "" ? setter("") : setter("visible");
-    });
-  }
-
   useEffect(() => {
     if (errorNameValue || errorEmailValue || errorPasswordValue) {
       setFormValid(false);
@@ -76,10 +76,10 @@ export const useValidationError = (path) => {
     handleNameErrorMessage,
     handleEmailErrorMessage,
     handlePasswordErrorMessage,
-    checkError,
     errorNameValue,
     errorEmailValue,
     errorPasswordValue,
     formValid,
+    isDirty,
   };
 };

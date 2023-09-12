@@ -10,13 +10,10 @@ function Profile({ onSignOut, path, onHandleProfileChange, editProfile, edit, ed
   const [nameValue, setNameValue] = useState(currentUser.name);
   const [emailValue, setEmailValue] = useState(currentUser.email);
   const [disabledButton, setDisabledBitton] = useState(true);
-  const [profileNameClass, setProfileNameClass] = useState("");
-  const [profileEmailClass, setProfileEmailClass] = useState("");
 
   const {
     handleNameErrorMessage,
     handleEmailErrorMessage,
-    checkError,
     errorNameValue,
     errorEmailValue,
   } = useValidationError(path);
@@ -51,14 +48,10 @@ function Profile({ onSignOut, path, onHandleProfileChange, editProfile, edit, ed
       <form className="profile__form" onSubmit={handleSubmit}>
         <input
           id="edit-name"
-          className="profile__form-input "
+          className={`profile__form-input ${errorNameValue && "form__input_red"}`}
           type="text"
           value={nameValue}
           onChange={handleNameChange}
-          onBlur={(e) =>
-            checkError(e, handleNameErrorMessage, setProfileNameClass)
-          }
-          onFocus={() => setProfileNameClass("")}
           name="name"
           minLength="2"
           maxLength="200"
@@ -67,20 +60,16 @@ function Profile({ onSignOut, path, onHandleProfileChange, editProfile, edit, ed
         />
         <span
           id="edit-name-error"
-          className={`error profile__form-input-error profile__form-input-name ${profileNameClass}`}
+          className={`error profile__form-input-error profile__form-input-name`}
         >
           {errorNameValue}
         </span>
         <input
           id="edit-email"
-          className="profile__form-input"
+          className={`profile__form-input ${errorEmailValue && "form__input_red"}`}
           type="text"
           value={emailValue}
           onChange={handleEmailChange}
-          onBlur={(e) =>
-            checkError(e, handleEmailErrorMessage, setProfileEmailClass)
-          }
-          onFocus={() => setProfileEmailClass("")}
           name="email"
           minLength="2"
           maxLength="200"
@@ -89,7 +78,7 @@ function Profile({ onSignOut, path, onHandleProfileChange, editProfile, edit, ed
         />
         <span
           id="edit-email-error"
-          className={`error profile__form-input-error profile__form-input-email ${profileEmailClass}`}
+          className={`error profile__form-input-error profile__form-input-email`}
         >
           {errorEmailValue}
         </span>
