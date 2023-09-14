@@ -6,7 +6,6 @@ function request(url, options) {
   return fetch(url, options).then(checkResponse);
 }
 
-
 function getHeaders() {
   return {
     "Content-Type": "application/json",
@@ -14,11 +13,30 @@ function getHeaders() {
   };
 }
 
-// export function getUserInfo() {
-//   return request(`${BASE_URL}/users/me`, {
-//     headers: getHeaders(),
-//   });
-// }
+export function getSavedMovies() {
+  return request(`${BASE_URL}/movies`, {
+    method: "GET",
+    headers: getHeaders(),
+  });
+} 
+
+export function saveMovie(film) {
+  const {country, director, duration, year, description, image, trailerLink, nameRU, nameEN, id} = film
+  return request(`${BASE_URL}/movies`, {
+    method: "POST",
+    headers: getHeaders(),
+    body: JSON.stringify({
+      country, director, duration, year, description, image, trailerLink, nameRU, nameEN, id
+    }),
+  });
+}
+
+export function deleteMovie(id) {
+  return request(`${BASE_URL}/movies/${id}`, {
+    method: "DELETE",
+    headers: getHeaders(),
+  });
+}
 
 export function editProfile(userName, userEmail) {
   return request(`${BASE_URL}/users/me`, {
@@ -30,7 +48,6 @@ export function editProfile(userName, userEmail) {
     }),
   });
 }
-
 
 export function register(name, email, password) {
   return request(`${BASE_URL}/signup`, {

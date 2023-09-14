@@ -23,6 +23,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [allMovies, setAllMovies] = useState([]);
   const [searchedMovies, setSearchedMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [noMoviesMessage, setNoMoviesMessage] = useState("");
   const [serverError, setServerError] = useState("");
@@ -43,6 +44,8 @@ function App() {
       navigate("/movies");
     } else if (path === "/profile") {
       navigate("/profile");
+    } else if (path === "/saved-movies") {
+      navigate("/saved-movies");
     } else if (path === "/" || path === "/signup" || path === "/signin") {
       navigate("/");
     }
@@ -60,10 +63,6 @@ function App() {
         .catch(console.error);
     }
   }
-
-  useEffect(() => {
-    tokenCheck();
-  }, []);
 
   async function initialSearch() {
     try {
@@ -158,9 +157,9 @@ function App() {
       .then((user) => {
         setCurrentUser(user);
         setEdit(false);
-        setEditMessage('Данные пользователя успешно изменены!')
+        setEditMessage("Данные пользователя успешно изменены!");
       })
-      .catch(() => setEditMessage('При обновлении профиля произошла ошибка.'));
+      .catch(() => setEditMessage("При обновлении профиля произошла ошибка."));
   }
 
   function editProfile() {
@@ -172,13 +171,44 @@ function App() {
     localStorage.clear();
     setCurrentUser({});
     setLoggedIn(false);
+    // setSavedMovies([]);
     navigate("/");
   }
+
+  function saveMovie(movie) {
+    mainApi
+      .saveMovie(movie)
+      .then((res) => {
+        setSavedMovies([res, ...savedMovies]);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function deleteMovie(id) {
+    mainApi
+      .deleteMovie(id)
+      .then((res) => {
+        setSavedMovies((state) => state.filter((movie) => movie.movieId !== res.movieId))
+      })
+      .catch((res) => console.log(res));
+  }
+
+  useEffect(() => {
+    tokenCheck();
+    mainApi
+      .getSavedMovies()
+      .then((res) => setSavedMovies(res))
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
-        <Header loggedIn={loggedIn} setEdit={setEdit} setEditMessage={setEditMessage}/>
+        <Header
+          loggedIn={loggedIn}
+          setEdit={setEdit}
+          setEditMessage={setEditMessage}
+        />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route
@@ -193,6 +223,9 @@ function App() {
                 count={count}
                 isLoading={isLoading}
                 noMoviesMessage={noMoviesMessage}
+                saveMovie={saveMovie}
+                savedMovies={savedMovies}
+                deleteMovie={deleteMovie}
               />
             }
           />
@@ -200,7 +233,11 @@ function App() {
           <Route
             path="/saved-movies"
             element={
-              <ProtectedRoute element={SavedMovies} loggedIn={loggedIn} />
+              <ProtectedRoute
+                element={SavedMovies}
+                loggedIn={loggedIn}
+                savedMovies={savedMovies}
+              />
             }
           />
           <Route

@@ -4,7 +4,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 import { useState, useEffect } from "react";
 
-function Movies({ searchedMovies, searchMovies, addMoreMovies, count, isLoading, noMoviesMessage }) {
+function Movies({ searchedMovies, searchMovies, addMoreMovies, count, isLoading, noMoviesMessage, saveMovie, savedMovies, deleteMovie }) {
   const [searchWord, setSearchWord] = useState("");
   const [visibleMovies, setVisibleMovies] = useState([]);
   const [short, setShort] = useState(false);
@@ -56,6 +56,9 @@ function Movies({ searchedMovies, searchMovies, addMoreMovies, count, isLoading,
         addMoreMovies={addMoreMovies}
         count={count}
         short={short}
+        saveMovie={saveMovie}
+        savedMovies={savedMovies}
+        deleteMovie={deleteMovie}
       />)}
     </section>
   );
