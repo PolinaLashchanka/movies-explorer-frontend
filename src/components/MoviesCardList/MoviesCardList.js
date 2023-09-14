@@ -8,7 +8,7 @@ function MoviesCardList({
   count,
   short,
   saveMovie,
-  visibleSavedMovies,
+  savedMovies,
   deleteMovie,
 }) {
   const location = useLocation();
@@ -29,7 +29,7 @@ function MoviesCardList({
                 key={path === "/movies" ? film.id : film.movieId}
                 film={film}
                 saveMovie={saveMovie}
-                visibleSavedMovies={visibleSavedMovies}
+                savedMovies={savedMovies}
                 deleteMovie={deleteMovie}
               />
             ))}

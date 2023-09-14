@@ -38,6 +38,8 @@ function SavedMovies({
     <section className="main saved-movies">
       <SearchForm
         searchShortMovies={searchSavedShortMovies}
+        searchWord={searchWordSaved}
+        setSearchWord={setSearchWordSaved}
         short={savedShort}
         className={classNameSaved}
         setClassName={setClassNameSaved}

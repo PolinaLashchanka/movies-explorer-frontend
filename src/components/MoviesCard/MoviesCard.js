@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import "./MoviesCard.css";
 
-function MoviesCard({ film, saveMovie, visibleSavedMovies, deleteMovie }) {
+function MoviesCard({ film, saveMovie, savedMovies, deleteMovie }) {
   const location = useLocation();
   const path = location.pathname;
   const minutes = film.duration;
@@ -11,7 +11,7 @@ function MoviesCard({ film, saveMovie, visibleSavedMovies, deleteMovie }) {
       ? `${(minutes / 60) | 0} ч ${minutes % 60} мин`
       : `${minutes} мин`;
 
-  const isSaved = visibleSavedMovies && visibleSavedMovies.some((i) => i.movieId === film.id);
+  const isSaved = savedMovies && savedMovies.some((i) => i.movieId === film.id);
 
   function changeSavedButtonState(film) {
     if (isSaved) {

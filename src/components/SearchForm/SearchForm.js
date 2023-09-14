@@ -4,12 +4,14 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 function SearchForm({
   searchShortMovies,
   searchWord,
+  setSearchWord,
   handleChange,
   handleSubmit,
   short,
   className,
   setClassName
 }) {
+
   return (
     <section className="search-form">
       <form className="search-form__form">
@@ -25,7 +27,9 @@ function SearchForm({
             onChange={handleChange}
             value={searchWord}
             required
-            onFocus={() => setClassName('')}
+            onFocus={() => {
+              setSearchWord('');
+              setClassName('');}}
           />
           <button className="button search-form__button" onClick={handleSubmit}>
             Поиск

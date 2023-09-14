@@ -86,7 +86,7 @@ function App() {
         movie.nameEN.toLowerCase().includes(word)
       );
     });
-    if (path === '/movies') {
+    if (path === "/movies") {
       localStorage.setItem("searchedMovies", JSON.stringify(searchedMovies));
       localStorage.setItem("searchWord", JSON.stringify(word));
     }
@@ -136,12 +136,14 @@ function App() {
     try {
       setIsLoading(true);
       const searchedSavedMovies = await selectedSearch(savedMovies, word);
-      searchedSavedMovies.length === 0 ? noSavedMoviesFound() : savedMoviesFound(searchedSavedMovies);
-    }catch (err) {
+      searchedSavedMovies.length === 0
+        ? noSavedMoviesFound()
+        : savedMoviesFound(searchedSavedMovies);
+    } catch (err) {
       console.log(err);
     } finally {
       setIsLoading(false);
-    }    
+    }
   }
 
   function onHandleRegister(name, email, password) {
@@ -205,7 +207,7 @@ function App() {
     mainApi
       .saveMovie(movie)
       .then((res) => {
-        setVisibleSavedMovies([res, ...visibleSavedMovies]);
+        setSavedMovies([res, ...savedMovies]);
       })
       .catch((err) => console.log(err));
   }
@@ -214,6 +216,9 @@ function App() {
     mainApi
       .deleteMovie(id)
       .then((res) => {
+        setSavedMovies((state) =>
+          state.filter((movie) => movie.movieId !== res.movieId)
+        );
         setVisibleSavedMovies((state) =>
           state.filter((movie) => movie.movieId !== res.movieId)
         );
@@ -222,14 +227,14 @@ function App() {
   }
 
   function getAllSavedMovies() {
-    setNoSavedMoviesMessage('');
+    setNoSavedMoviesMessage("");
     mainApi
-    .getSavedMovies()
-    .then((res) => {
+      .getSavedMovies()
+      .then((res) => {
         setVisibleSavedMovies(res.reverse());
         setSavedMovies(res);
-    })
-    .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
   }
 
   useEffect(() => {
@@ -264,7 +269,7 @@ function App() {
                 isLoading={isLoading}
                 noMoviesMessage={noMoviesMessage}
                 saveMovie={saveMovie}
-                visibleSavedMovies={visibleSavedMovies}
+                savedMovies={savedMovies}
                 deleteMovie={deleteMovie}
               />
             }
