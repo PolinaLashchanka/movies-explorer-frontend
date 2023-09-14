@@ -5,7 +5,7 @@ import logo from "../../images/logo.svg";
 import icon from "../../images/icon__COLOR_icon-main.svg";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
-function Header({ loggedIn, setEdit, setEditMessage }) {
+function Header({ loggedIn, setEdit, setEditMessage, getAllSavedMovies }) {
   const location = useLocation();
   const path = location.pathname;
 
@@ -66,7 +66,9 @@ function Header({ loggedIn, setEdit, setEditMessage }) {
                 Фильмы
               </Link>
               <Link
-                onClick={closeNav}
+                onClick={() => {
+                  getAllSavedMovies();
+                  closeNav();}}
                 to="/saved-movies"
                 className="header__link header__burger-link link"
                 style={path === "/saved-movies" ? { fontWeight: 500 } : {}}

@@ -24,8 +24,10 @@ function App() {
   const [allMovies, setAllMovies] = useState([]);
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
+  const [visibleSavedMovies, setVisibleSavedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [noMoviesMessage, setNoMoviesMessage] = useState("");
+  const [noSavedMoviesMessage, setNoSavedMoviesMessage] = useState("");
   const [serverError, setServerError] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [edit, setEdit] = useState(false);
@@ -84,8 +86,10 @@ function App() {
         movie.nameEN.toLowerCase().includes(word)
       );
     });
-    localStorage.setItem("searchedMovies", JSON.stringify(searchedMovies));
-    localStorage.setItem("searchWord", JSON.stringify(word));
+    if (path === '/movies') {
+      localStorage.setItem("searchedMovies", JSON.stringify(searchedMovies));
+      localStorage.setItem("searchWord", JSON.stringify(word));
+    }
     return searchedMovies;
   }
 
@@ -97,6 +101,16 @@ function App() {
   function moviesFound(movies) {
     setNoMoviesMessage("");
     setSearchedMovies(movies);
+  }
+
+  function noSavedMoviesFound() {
+    setNoSavedMoviesMessage("Ничего не найдено.");
+    setVisibleSavedMovies([]);
+  }
+
+  function savedMoviesFound(movies) {
+    setNoSavedMoviesMessage("");
+    setVisibleSavedMovies(movies);
   }
 
   async function searchMovies(word) {
@@ -116,6 +130,18 @@ function App() {
     } finally {
       setIsLoading(false);
     }
+  }
+
+  async function searchSavedMovies(word) {
+    try {
+      setIsLoading(true);
+      const searchedSavedMovies = await selectedSearch(savedMovies, word);
+      searchedSavedMovies.length === 0 ? noSavedMoviesFound() : savedMoviesFound(searchedSavedMovies);
+    }catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }    
   }
 
   function onHandleRegister(name, email, password) {
@@ -171,7 +197,7 @@ function App() {
     localStorage.clear();
     setCurrentUser({});
     setLoggedIn(false);
-    // setSavedMovies([]);
+    setSearchedMovies([]);
     navigate("/");
   }
 
@@ -179,7 +205,7 @@ function App() {
     mainApi
       .saveMovie(movie)
       .then((res) => {
-        setSavedMovies([res, ...savedMovies]);
+        setVisibleSavedMovies([res, ...visibleSavedMovies]);
       })
       .catch((err) => console.log(err));
   }
@@ -188,18 +214,31 @@ function App() {
     mainApi
       .deleteMovie(id)
       .then((res) => {
-        setSavedMovies((state) => state.filter((movie) => movie.movieId !== res.movieId))
+        setVisibleSavedMovies((state) =>
+          state.filter((movie) => movie.movieId !== res.movieId)
+        );
       })
       .catch((res) => console.log(res));
   }
 
+  function getAllSavedMovies() {
+    setNoSavedMoviesMessage('');
+    mainApi
+    .getSavedMovies()
+    .then((res) => {
+        setVisibleSavedMovies(res.reverse());
+        setSavedMovies(res);
+    })
+    .catch((err) => console.log(err));
+  }
+
   useEffect(() => {
     tokenCheck();
-    mainApi
-      .getSavedMovies()
-      .then((res) => setSavedMovies(res))
-      .catch((err) => console.log(err));
   }, []);
+
+  useEffect(() => {
+    getAllSavedMovies();
+  }, [loggedIn]);
 
   return (
     <div className="page">
@@ -208,6 +247,7 @@ function App() {
           loggedIn={loggedIn}
           setEdit={setEdit}
           setEditMessage={setEditMessage}
+          getAllSavedMovies={getAllSavedMovies}
         />
         <Routes>
           <Route path="/" element={<Main />} />
@@ -224,7 +264,7 @@ function App() {
                 isLoading={isLoading}
                 noMoviesMessage={noMoviesMessage}
                 saveMovie={saveMovie}
-                savedMovies={savedMovies}
+                visibleSavedMovies={visibleSavedMovies}
                 deleteMovie={deleteMovie}
               />
             }
@@ -236,7 +276,12 @@ function App() {
               <ProtectedRoute
                 element={SavedMovies}
                 loggedIn={loggedIn}
-                savedMovies={savedMovies}
+                visibleSavedMovies={visibleSavedMovies}
+                setSavedMovies={setSavedMovies}
+                searchSavedMovies={searchSavedMovies}
+                isLoading={isLoading}
+                noSavedMoviesMessage={noSavedMoviesMessage}
+                deleteMovie={deleteMovie}
               />
             }
           />

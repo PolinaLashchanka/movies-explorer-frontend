@@ -8,7 +8,7 @@ function MoviesCardList({
   count,
   short,
   saveMovie,
-  savedMovies,
+  visibleSavedMovies,
   deleteMovie,
 }) {
   const location = useLocation();
@@ -20,7 +20,7 @@ function MoviesCardList({
   return (
     <>
       {filteredMovies.length === 0 ? (
-        <h2 className="movies__no-result-message">Ничего не найдено.</h2>
+        (path === '/movies' ? (<h2 className="movies__no-result-message">Ничего не найдено.</h2>) : (<h2 className="movies__no-result-message">Нет сохраненных фильмов.</h2>))
       ) : (
         <section className="movies-list">
           <div className="movies-list__container">
@@ -29,7 +29,7 @@ function MoviesCardList({
                 key={path === "/movies" ? film.id : film.movieId}
                 film={film}
                 saveMovie={saveMovie}
-                savedMovies={savedMovies}
+                visibleSavedMovies={visibleSavedMovies}
                 deleteMovie={deleteMovie}
               />
             ))}

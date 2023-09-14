@@ -4,7 +4,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 import { useState, useEffect } from "react";
 
-function Movies({ searchedMovies, searchMovies, addMoreMovies, count, isLoading, noMoviesMessage, saveMovie, savedMovies, deleteMovie }) {
+function Movies({ searchedMovies, searchMovies, addMoreMovies, count, isLoading, noMoviesMessage, saveMovie, visibleSavedMovies, deleteMovie }) {
   const [searchWord, setSearchWord] = useState("");
   const [visibleMovies, setVisibleMovies] = useState([]);
   const [short, setShort] = useState(false);
@@ -39,6 +39,8 @@ function Movies({ searchedMovies, searchMovies, addMoreMovies, count, isLoading,
     }
   };
 
+  
+
   return (
     <section className="main movies">
       <SearchForm
@@ -57,7 +59,7 @@ function Movies({ searchedMovies, searchMovies, addMoreMovies, count, isLoading,
         count={count}
         short={short}
         saveMovie={saveMovie}
-        savedMovies={savedMovies}
+        visibleSavedMovies={visibleSavedMovies}
         deleteMovie={deleteMovie}
       />)}
     </section>
