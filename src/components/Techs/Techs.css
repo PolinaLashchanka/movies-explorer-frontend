@@ -1,6 +1,10 @@
 .techs {
-    padding: 100px 70px;
     background-color: #272727;
+    width: 100%;
+}
+
+.techs__container {
+    padding: 100px 70px;
 }
 
 .techs__header {
@@ -45,7 +49,7 @@
 }
 
 @media (max-width: 768px) {
-    .techs {
+    .techs__container {
         padding: 90px 50px;
     }
     
@@ -72,7 +76,7 @@
 }
 
 @media (max-width: 320px) {
-    .techs {
+    .techs__container {
         padding: 53px 18px;
         background-color: #202020;
     }

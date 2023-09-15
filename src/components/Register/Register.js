@@ -1,7 +1,7 @@
 import AuthorizationForm from "../AuthorizationForm/AuthorizationForm";
 import { useState } from "react";
 
-function Register() {
+function Register({ onHandleRegister, serverError, setServerError }) {
   const [formValue, setFormValue] = useState({
     name: "",
     email: "",
@@ -12,9 +12,14 @@ function Register() {
     const { name, value } = e.target;
     setFormValue({ ...formValue, [name]: value });
     func(e);
-};
+  };
 
   const { name, email, password } = formValue;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onHandleRegister(name, email, password);
+  };
 
   return (
     <section className="authorization register">
@@ -28,6 +33,9 @@ function Register() {
         name={name}
         email={email}
         password={password}
+        handleSubmit={handleSubmit}
+        serverError={serverError}
+        setServerError={setServerError}
       />
     </section>
   );

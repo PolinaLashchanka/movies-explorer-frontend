@@ -1,10 +1,10 @@
 import './FilterCheckbox.css';
 
-function FilterCheckbox() {
+function FilterCheckbox({searchShortMovies, short}) {
     return(
         <div className="checkbox">
-            <label for="short-films" className="checkbox__label">
-                <input type="checkbox" className="checkbox__custom" id="short-films" />
+            <label htmlFor="short-films" className="checkbox__label">
+                <input type="checkbox" className="checkbox__custom" id="short-films" onChange={searchShortMovies} checked={short}/>
                 <span className="checkbox__pseudo-item"></span>
                 <span className="checkbox__text">Короткометражки</span>
             </label>

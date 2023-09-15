@@ -1,7 +1,9 @@
+import { AppContext } from "../../context/AppContext";
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import "./AuthorizationForm.css";
-import { useEffect, useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useValidationError } from "../../hooks/useValidationError";
 
 function AuthorizationForm({
   header,
@@ -13,100 +15,69 @@ function AuthorizationForm({
   name,
   email,
   password,
+  handleSubmit,
+  serverError,
+  setServerError,
 }) {
-  const hidden = `${path === "/signup" ? "hidden" : ""}`;
-  const [formValid, setFormValid] = useState(false);
-  const [nameClass, setNameClass] = useState("");
-  const [emailClass, setEmailClass] = useState("");
-  const [passwordClass, setPasswordClass] = useState("");
-  const [errorEmailValue, setErrorEmailValue] = useState(
-    "Это поле не может быть пустым"
-  );
-  const [errorValue, setErrorValue] = useState({
-    nameError: `${path === '/signup' ? "" : "Это поле не может быть пустым"}`,
-    passwordError: "Это поле не может быть пустым",
-  });
+  const [isNameDirty, setIsNameDirty] = useState(false);
+  const [isEmailDirty, setIsEmailDirty] = useState(false);
+  const [isPasswordDirty, setIsPasswordDirty] = useState(false);
 
-  const handleErrorMessage = async (e) => {
-    const { name, validationMessage } = e.target;
-    setErrorValue({ ...errorValue, [`${name}Error`]: validationMessage });
-    return validationMessage;
-  };
+  const isLoading = useContext(AppContext);
 
-  const handleEmailErrorMessage = async (e) => {
-    const { value } = e.target;
-    const re =
-      /^((([0-9A-Za-z]{1}[-0-9A-z.]{0,30}[0-9A-Za-z]?)|([0-9А-Яа-я]{1}[-0-9А-я.]{0,30}[0-9А-Яа-я]?))@([-A-Za-z]{1,}\.){1,}[-A-Za-z]{2,})$/i;
-    if (value === "") {
-      setErrorEmailValue("Это поле не может быть пустым");
-    } else if (!re.test(String(value).toLocaleLowerCase())) {
-      setErrorEmailValue("Вы ввели некорректный имейл");
-    } else {
-      setErrorEmailValue("");
-    }
-    return errorEmailValue;
-  };
-
-  function checkNameError(e) {
-    handleErrorMessage(e).then((message) => {
-      message === "" ? setNameClass("") : setNameClass("visible");
-    });
-  }
-
-  function checkEmailError(e) {
-    handleEmailErrorMessage(e).then((message) => {
-      message === "" ? setEmailClass("") : setEmailClass("visible");
-    });
-  }
-
-  function checkPasswordError(e) {
-    handleErrorMessage(e).then((message) => {
-      message === "" ? setPasswordClass("") : setPasswordClass("visible");
-    });
-  }
-
-  const { nameError, passwordError } = errorValue;
+  const {
+    hidden,
+    handleNameErrorMessage,
+    handleEmailErrorMessage,
+    handlePasswordErrorMessage,
+    errorNameValue,
+    errorEmailValue,
+    errorPasswordValue,
+    formValid,
+    isDirty,
+  } = useValidationError(path);
 
   useEffect(() => {
-    if (nameError || errorEmailValue || passwordError) {
-      setFormValid(false);
-    } else {
-      setFormValid(true);
-    }
-  }, [nameError, errorEmailValue, passwordError]);
+    setServerError("");
+  }, []);
 
   return (
-    <form className="form" noValidate>
+    <form className="form" noValidate onSubmit={handleSubmit}>
       <Link to="/" className="form__logo">
         <img src={logo} alt="логотип" />
       </Link>
       <h2 className="form__header">{header}</h2>
-      <div className="form__input-container">
+      <div
+        className={`form__input-container ${
+          path === "/signup" ? "form__input-container_margin" : ""
+        }`}
+      >
         <label htmlFor="authorization-name" className={`form__label ${hidden}`}>
           Имя
         </label>
         <input
           id="authorization-name"
           className={`form__input ${hidden} ${
-            nameClass === "visible" ? `form__input_red` : ""
+            errorNameValue && isNameDirty && "form__input_red"
           }`}
           type="text"
           name="name"
-          minLength="2"
-          maxLength="200"
-          onChange={(e) => handleChange(e, handleErrorMessage)}
-          onBlur={checkNameError}
+          onChange={(e) => handleChange(e, handleNameErrorMessage)}
+          onBlur={() => isDirty(setIsNameDirty)}
           onFocus={() => {
-            setNameClass("");
+            setServerError("");
           }}
           value={name}
+          disabled={isLoading}
           required
         />
         <span
           id="authorization-name-error"
-          className={`error form__input-error ${hidden} ${nameClass}`}
+          className={`error form__input-error ${hidden} ${
+            isNameDirty && "visible"
+          }`}
         >
-          {nameError}
+          {errorNameValue}
         </span>
         <label htmlFor="authorization-email" className="form__label">
           E-mail
@@ -114,21 +85,22 @@ function AuthorizationForm({
         <input
           id="authorization-email"
           className={`form__input ${
-            emailClass !== "" ? `form__input_red` : ""
+            errorEmailValue && isEmailDirty && "form__input_red"
           }`}
           type="email"
           name="email"
           onChange={(e) => handleChange(e, handleEmailErrorMessage)}
-          onBlur={checkEmailError}
+          onBlur={() => isDirty(setIsEmailDirty)}
           onFocus={() => {
-            setEmailClass("");
+            setServerError("");
           }}
           value={email}
+          disabled={isLoading}
           required
         />
         <span
           id="authorization-email-error"
-          className={`error form__input-error ${emailClass}`}
+          className={`error form__input-error ${isEmailDirty && "visible"}`}
         >
           {errorEmailValue}
         </span>
@@ -138,35 +110,34 @@ function AuthorizationForm({
         <input
           id="authorization-password"
           className={`form__input ${
-            passwordClass !== "" ? `form__input_red` : ""
+            errorPasswordValue && isPasswordDirty && "form__input_red"
           }`}
           type="password"
           name="password"
-          minLength="5"
-          maxLength="200"
-          onChange={(e) => handleChange(e, handleErrorMessage)}
-          onBlur={checkPasswordError}
+          onChange={(e) => handleChange(e, handlePasswordErrorMessage)}
+          onBlur={() => isDirty(setIsPasswordDirty)}
           onFocus={() => {
-            setPasswordClass("");
+            setServerError("");
           }}
           value={password}
+          disabled={isLoading}
           required
         />
         <span
           id="authorization-password-error"
-          className={`error form__input-error ${passwordClass}`}
+          className={`error form__input-error ${isPasswordDirty && "visible"}`}
         >
-          {passwordError}
+          {errorPasswordValue}
         </span>
       </div>
       <div className="form__button-container">
+        <h2 className="server-error">{serverError ? serverError : ""}</h2>
         <button
-          disabled={!formValid}
-          className={`button form__button ${
-            path === "/signup" ? "form__button_margin" : ""
-          }`}
+          type="submit"
+          disabled={isLoading || !formValid}
+          className="button form__button"
         >
-          {buttonName}
+          {buttonName + (isLoading ? "..." : "")}
         </button>
         <p className="form__text">
           {formText}

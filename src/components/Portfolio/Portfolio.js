@@ -3,7 +3,7 @@ import linkArrow from "../../images/arrow.svg";
 
 function Portfolio() {
   return (
-    <section className="portfolio">
+    <section className="portfolio container">
       <h2 className="portfolio__header">Портфолио</h2>
       <ul className="portfolio__links">
         <li className="portfolio__link portfolio__link-line">
@@ -13,7 +13,7 @@ function Portfolio() {
             target="_blank"
             rel="noreferrer"
           >
-          <p className="portfolio__link-name">Статичный сайт</p>
+            <p className="portfolio__link-name">Статичный сайт</p>
             <img
               src={linkArrow}
               alt="ссылка на сайт ввиде стрелки"
@@ -28,7 +28,7 @@ function Portfolio() {
             target="_blank"
             rel="noreferrer"
           >
-          <p className="portfolio__link-name">Адаптивный сайт</p>
+            <p className="portfolio__link-name">Адаптивный сайт</p>
             <img
               src={linkArrow}
               alt="ссылка на сайт ввиде стрелки"
@@ -43,7 +43,7 @@ function Portfolio() {
             target="_blank"
             rel="noreferrer"
           >
-          <p className="portfolio__link-name">Одностраничное приложение</p>
+            <p className="portfolio__link-name">Одностраничное приложение</p>
             <img
               src={linkArrow}
               alt="ссылка на сайт ввиде стрелки"
