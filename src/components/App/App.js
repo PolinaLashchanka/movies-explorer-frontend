@@ -155,7 +155,6 @@ function App() {
           const { token, ...rest } = data;
           handleLogin(rest);
           navigate("/movies");
-          setServerError("");
         }
       })
       .catch((err) => {

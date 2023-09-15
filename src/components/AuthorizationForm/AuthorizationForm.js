@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import "./AuthorizationForm.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useValidationError } from "../../hooks/useValidationError";
 
 function AuthorizationForm({
@@ -33,6 +33,10 @@ function AuthorizationForm({
     formValid,
     isDirty,
   } = useValidationError(path);
+
+  useEffect(() => {
+    setServerError('');
+  }, [])
 
   return (
     <form className="form" noValidate onSubmit={handleSubmit}>
@@ -135,7 +139,6 @@ function AuthorizationForm({
             <Link
               to={path}
               className="form__link link"
-              onClick={() => setServerError("")}
             >
               {linkText}
             </Link>
