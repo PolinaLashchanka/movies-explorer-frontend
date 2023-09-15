@@ -54,7 +54,12 @@ function MoviesCard({ film, saveMovie, savedMovies, deleteMovie }) {
         </button>
       )}
       {path === "/saved-movies" && (
-        <button onClick={() => deleteMovie(film.movieId)} className="button card__save-button">&#10006;</button>
+        <button
+          onClick={() => deleteMovie(film.movieId)}
+          className="button card__save-button"
+        >
+          &#10006;
+        </button>
       )}
     </div>
   );

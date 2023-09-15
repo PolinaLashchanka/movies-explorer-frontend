@@ -1,7 +1,7 @@
 import AuthorizationForm from "../AuthorizationForm/AuthorizationForm";
 import { useState } from "react";
 
-function Register({onHandleRegister, serverError, setServerError}) {
+function Register({ onHandleRegister, serverError, setServerError }) {
   const [formValue, setFormValue] = useState({
     name: "",
     email: "",
@@ -12,7 +12,7 @@ function Register({onHandleRegister, serverError, setServerError}) {
     const { name, value } = e.target;
     setFormValue({ ...formValue, [name]: value });
     func(e);
-};
+  };
 
   const { name, email, password } = formValue;
 

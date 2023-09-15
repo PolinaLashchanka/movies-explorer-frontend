@@ -9,9 +9,8 @@ function SearchForm({
   handleSubmit,
   short,
   className,
-  setClassName
+  setClassName,
 }) {
-
   return (
     <section className="search-form">
       <form className="search-form__form">
@@ -28,8 +27,9 @@ function SearchForm({
             value={searchWord}
             required
             onFocus={() => {
-              setSearchWord('');
-              setClassName('');}}
+              setSearchWord("");
+              setClassName("");
+            }}
           />
           <button className="button search-form__button" onClick={handleSubmit}>
             Поиск
@@ -38,7 +38,9 @@ function SearchForm({
         <span
           id="input-film-search-error"
           className={`search-form__input-error ${className}`}
-        >Нужно ввести ключевое слово</span>
+        >
+          Нужно ввести ключевое слово
+        </span>
       </form>
       <FilterCheckbox searchShortMovies={searchShortMovies} short={short} />
     </section>

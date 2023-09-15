@@ -5,7 +5,16 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 import { useState, useEffect, useContext } from "react";
 
-function Movies({ searchedMovies, searchMovies, addMoreMovies, count, noMoviesMessage, saveMovie, savedMovies, deleteMovie }) {
+function Movies({
+  searchedMovies,
+  searchMovies,
+  addMoreMovies,
+  count,
+  noMoviesMessage,
+  saveMovie,
+  savedMovies,
+  deleteMovie,
+}) {
   const [searchWord, setSearchWord] = useState("");
   const [visibleMovies, setVisibleMovies] = useState([]);
   const [short, setShort] = useState(false);
@@ -42,8 +51,6 @@ function Movies({ searchedMovies, searchMovies, addMoreMovies, count, noMoviesMe
     }
   };
 
-  
-
   return (
     <section className="main movies">
       <SearchForm
@@ -57,15 +64,19 @@ function Movies({ searchedMovies, searchMovies, addMoreMovies, count, noMoviesMe
         setClassName={setClassName}
       />
       {isLoading && <Preloader />}
-      {visibleMovies.length === 0 ? (<h2 className="movies__no-result-message">{noMoviesMessage}</h2>) : (<MoviesCardList
-        visibleMovies={visibleMovies}
-        addMoreMovies={addMoreMovies}
-        count={count}
-        short={short}
-        saveMovie={saveMovie}
-        savedMovies={savedMovies}
-        deleteMovie={deleteMovie}
-      />)}
+      {visibleMovies.length === 0 ? (
+        <h2 className="movies__no-result-message">{noMoviesMessage}</h2>
+      ) : (
+        <MoviesCardList
+          visibleMovies={visibleMovies}
+          addMoreMovies={addMoreMovies}
+          count={count}
+          short={short}
+          saveMovie={saveMovie}
+          savedMovies={savedMovies}
+          deleteMovie={deleteMovie}
+        />
+      )}
     </section>
   );
 }

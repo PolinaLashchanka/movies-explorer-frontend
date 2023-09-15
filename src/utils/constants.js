@@ -1,3 +1,10 @@
 export const SCREEN_SM = 740;
 export const SCREEN_MD = 1170;
 export const SCREEN_LG = 1171;
+export const SHOWN_FILMS_LG= 12;
+export const SHOWN_FILMS_MD = 8;
+export const SHOWN_FILMS_SM = 5;
+export const PLUS_TWO_FILMS = 2;
+export const PLUS_THREE_FILMS = 3;
+export const SHORT_FILM_DURATION = 41;
+export const BASE_URL = "https://api.films-search.students.nomoreparties.co";

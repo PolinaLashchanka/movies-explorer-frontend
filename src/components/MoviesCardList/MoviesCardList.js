@@ -1,6 +1,7 @@
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import { useLocation } from "react-router-dom";
+import { SHORT_FILM_DURATION } from "../../utils/constants";
 
 function MoviesCardList({
   visibleMovies,
@@ -14,13 +15,19 @@ function MoviesCardList({
   const location = useLocation();
   const path = location.pathname;
   const filteredMovies = short
-    ? visibleMovies.filter((film) => film.duration < 41)
+    ? visibleMovies.filter((film) => film.duration < SHORT_FILM_DURATION)
     : visibleMovies;
 
   return (
     <>
       {filteredMovies.length === 0 ? (
-        (path === '/movies' ? (<h2 className="movies__no-result-message">Ничего не найдено.</h2>) : (<h2 className="movies__no-result-message">Нет сохраненных фильмов.</h2>))
+        path === "/movies" ? (
+          <h2 className="movies__no-result-message">Ничего не найдено.</h2>
+        ) : (
+          <h2 className="movies__no-result-message">
+            Нет сохраненных фильмов.
+          </h2>
+        )
       ) : (
         <section className="movies-list">
           <div className="movies-list__container">
@@ -35,7 +42,8 @@ function MoviesCardList({
             ))}
           </div>
           {path === "/movies" ? (
-            filteredMovies.length > 0 && filteredMovies.length > count && (
+            filteredMovies.length > 0 &&
+            filteredMovies.length > count && (
               <button
                 onClick={addMoreMovies}
                 className="button movies-list__button"

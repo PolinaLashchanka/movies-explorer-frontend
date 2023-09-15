@@ -11,14 +11,13 @@ function SavedMovies({
   noSavedMoviesMessage,
   deleteMovie,
 }) {
-
   const isLoading = useContext(AppContext);
 
   const [savedShort, setSavedShort] = useState(false);
   const [searchWordSaved, setSearchWordSaved] = useState("");
   const [classNameSaved, setClassNameSaved] = useState("");
 
-   function searchSavedShortMovies() {
+  function searchSavedShortMovies() {
     setSavedShort(!savedShort);
   }
 
@@ -26,7 +25,6 @@ function SavedMovies({
     const { value } = e.target;
     setSearchWordSaved(value);
   };
-
 
   const handleSavedSubmit = (e) => {
     e.preventDefault();

@@ -46,8 +46,6 @@ function Profile({
       : setDisabledBitton(false);
   }, [nameValue, emailValue, currentUser.name, currentUser.email]);
 
-  console.log(errorNameValue);
-
   function handleSubmit(e) {
     e.preventDefault();
     onHandleProfileChange(nameValue, emailValue);

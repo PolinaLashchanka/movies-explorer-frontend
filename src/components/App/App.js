@@ -16,6 +16,7 @@ import moviesApi from "../../utils/MoviesApi";
 import * as mainApi from "../../utils/MainApi";
 import { useEffect, useState } from "react";
 import { useResize } from "../../hooks/useResize";
+import { SHOWN_FILMS_LG, SHOWN_FILMS_MD, SHOWN_FILMS_SM } from "../../utils/constants";
 
 function App() {
   const navigate = useNavigate();
@@ -123,9 +124,9 @@ function App() {
       searchedMovies.length === 0
         ? noMoviesFound()
         : moviesFound(searchedMovies);
-      isScreenLg && setCount(12);
-      isScreenMd && setCount(8);
-      isScreenSm && setCount(5);
+      isScreenLg && setCount(SHOWN_FILMS_LG);
+      isScreenMd && setCount(SHOWN_FILMS_MD);
+      isScreenSm && setCount(SHOWN_FILMS_SM);
     } catch (err) {
       console.log(err);
     } finally {

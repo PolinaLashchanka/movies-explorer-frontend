@@ -4,7 +4,11 @@ export const useValidationError = (path) => {
   const hidden = `${path === "/signup" ? "hidden" : ""}`;
   const [formValid, setFormValid] = useState(false);
   const [errorNameValue, setErrorNameValue] = useState(
-    `${path === "/signup" || path === "/profile" ? "" : "Это поле не может быть пустым"}`
+    `${
+      path === "/signup" || path === "/profile"
+        ? ""
+        : "Это поле не может быть пустым"
+    }`
   );
   const [errorEmailValue, setErrorEmailValue] = useState(
     `${path === "/profile" ? "" : "Это поле не может быть пустым"}`
@@ -12,9 +16,6 @@ export const useValidationError = (path) => {
   const [errorPasswordValue, setErrorPasswordValue] = useState(
     `${path === "/profile" ? "" : "Это поле не может быть пустым"}`
   );
-
-
-
 
   const handleNameErrorMessage = async (e) => {
     const { value } = e.target;

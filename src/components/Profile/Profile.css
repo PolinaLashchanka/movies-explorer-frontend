@@ -107,10 +107,6 @@
     .profile__header {
         margin: 230px 0 80px;
     }
-
-    .profile__message {
-        /* margin: 10px 0 14px; */
-    }
 }
 
 @media (max-width: 470px) {

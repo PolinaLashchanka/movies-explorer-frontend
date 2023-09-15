@@ -1,9 +1,18 @@
 import { useState, useEffect } from "react";
-import { SCREEN_SM, SCREEN_MD, SCREEN_LG } from "../utils/constants";
+import {
+  SCREEN_SM,
+  SCREEN_MD,
+  SCREEN_LG,
+  SHOWN_FILMS_LG,
+  SHOWN_FILMS_MD,
+  SHOWN_FILMS_SM,
+  PLUS_TWO_FILMS,
+  PLUS_THREE_FILMS,
+} from "../utils/constants";
 
 export const useResize = () => {
   const [width, setWidth] = useState(window.innerWidth);
-  const [count, setCount] = useState(12);
+  const [count, setCount] = useState('');
 
   useEffect(() => {
     const handleResize = (event) => {
@@ -20,15 +29,15 @@ export const useResize = () => {
   const isScreenLg = width >= SCREEN_LG;
 
   function addMoreMovies() {
-    isScreenLg && setCount(count + 3);
-    isScreenMd && setCount(count + 2);
-    isScreenSm && setCount(count + 2);
+    isScreenLg && setCount(count + PLUS_THREE_FILMS);
+    isScreenMd && setCount(count + PLUS_TWO_FILMS);
+    isScreenSm && setCount(count + PLUS_TWO_FILMS);
   }
 
   useEffect(() => {
-    isScreenLg && setCount(12);
-    isScreenMd && setCount(8);
-    isScreenSm && setCount(5);
+    isScreenLg && setCount(SHOWN_FILMS_LG);
+    isScreenMd && setCount(SHOWN_FILMS_MD);
+    isScreenSm && setCount(SHOWN_FILMS_SM);
   }, [isScreenSm, isScreenMd, isScreenLg]);
 
   return {
