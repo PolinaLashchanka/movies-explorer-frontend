@@ -1,5 +1,6 @@
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import "./App.css";
+import { AppContext } from "../../context/AppContext";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute";
 import Header from "../Header/Header";
@@ -147,6 +148,7 @@ function App() {
   }
 
   function onHandleRegister(name, email, password) {
+    setIsLoading(true);
     mainApi
       .register(name, email, password)
       .then((data) => {
@@ -159,10 +161,14 @@ function App() {
       })
       .catch((err) => {
         setServerError(err.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
   function onHandleLogin(email, password) {
+    setIsLoading(true);
     mainApi
       .authorize(email, password)
       .then((data) => {
@@ -175,18 +181,25 @@ function App() {
       })
       .catch((err) => {
         setServerError(err.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
   function onHandleProfileChange(email, password) {
+    setIsLoading(true);
+    setEdit(false);
     mainApi
       .editProfile(email, password)
       .then((user) => {
         setCurrentUser(user);
-        setEdit(false);
         setEditMessage("Данные пользователя успешно изменены!");
       })
-      .catch(() => setEditMessage("При обновлении профиля произошла ошибка."));
+      .catch(() => setEditMessage("При обновлении профиля произошла ошибка."))
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   function editProfile() {
@@ -245,88 +258,88 @@ function App() {
   }, [loggedIn]);
 
   return (
-    <div className={`page ${path !== '/' && 'page__max-width'}`}>
-      <CurrentUserContext.Provider value={currentUser}>
-        <Header
-          loggedIn={loggedIn}
-          setEdit={setEdit}
-          setEditMessage={setEditMessage}
-          getAllSavedMovies={getAllSavedMovies}
-        />
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route
-            path="/movies"
-            element={
-              <ProtectedRoute
-                element={Movies}
-                loggedIn={loggedIn}
-                searchedMovies={searchedMovies}
-                searchMovies={searchMovies}
-                addMoreMovies={addMoreMovies}
-                count={count}
-                isLoading={isLoading}
-                noMoviesMessage={noMoviesMessage}
-                saveMovie={saveMovie}
-                savedMovies={savedMovies}
-                deleteMovie={deleteMovie}
-              />
-            }
+    <div className={`page ${path !== "/" && "page__max-width"}`}>
+      <AppContext.Provider value={isLoading}>
+        <CurrentUserContext.Provider value={currentUser}>
+          <Header
+            loggedIn={loggedIn}
+            setEdit={setEdit}
+            setEditMessage={setEditMessage}
+            getAllSavedMovies={getAllSavedMovies}
           />
-          <Route
-            path="/saved-movies"
-            element={
-              <ProtectedRoute
-                element={SavedMovies}
-                loggedIn={loggedIn}
-                visibleSavedMovies={visibleSavedMovies}
-                setSavedMovies={setSavedMovies}
-                searchSavedMovies={searchSavedMovies}
-                isLoading={isLoading}
-                noSavedMoviesMessage={noSavedMoviesMessage}
-                deleteMovie={deleteMovie}
-              />
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute
-                element={Profile}
-                loggedIn={loggedIn}
-                onSignOut={onSignOut}
-                path={"/profile"}
-                onHandleProfileChange={onHandleProfileChange}
-                editProfile={editProfile}
-                edit={edit}
-                editMessage={editMessage}
-              />
-            }
-          />
-          <Route
-            path="/signup"
-            element={
-              <Register
-                onHandleRegister={onHandleRegister}
-                serverError={serverError}
-                setServerError={setServerError}
-              />
-            }
-          />
-          <Route
-            path="/signin"
-            element={
-              <Login
-                onHandleLogin={onHandleLogin}
-                serverError={serverError}
-                setServerError={setServerError}
-              />
-            }
-          />
-          <Route path="/*" element={<PageNotFound />} />
-        </Routes>
-        <Footer />
-      </CurrentUserContext.Provider>
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route
+              path="/movies"
+              element={
+                <ProtectedRoute
+                  element={Movies}
+                  loggedIn={loggedIn}
+                  searchedMovies={searchedMovies}
+                  searchMovies={searchMovies}
+                  addMoreMovies={addMoreMovies}
+                  count={count}
+                  noMoviesMessage={noMoviesMessage}
+                  saveMovie={saveMovie}
+                  savedMovies={savedMovies}
+                  deleteMovie={deleteMovie}
+                />
+              }
+            />
+            <Route
+              path="/saved-movies"
+              element={
+                <ProtectedRoute
+                  element={SavedMovies}
+                  loggedIn={loggedIn}
+                  visibleSavedMovies={visibleSavedMovies}
+                  setSavedMovies={setSavedMovies}
+                  searchSavedMovies={searchSavedMovies}
+                  noSavedMoviesMessage={noSavedMoviesMessage}
+                  deleteMovie={deleteMovie}
+                />
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute
+                  element={Profile}
+                  loggedIn={loggedIn}
+                  onSignOut={onSignOut}
+                  path={"/profile"}
+                  onHandleProfileChange={onHandleProfileChange}
+                  editProfile={editProfile}
+                  edit={edit}
+                  editMessage={editMessage}
+                />
+              }
+            />
+            <Route
+              path="/signup"
+              element={
+                <Register
+                  onHandleRegister={onHandleRegister}
+                  serverError={serverError}
+                  setServerError={setServerError}
+                />
+              }
+            />
+            <Route
+              path="/signin"
+              element={
+                <Login
+                  onHandleLogin={onHandleLogin}
+                  serverError={serverError}
+                  setServerError={setServerError}
+                />
+              }
+            />
+            <Route path="/*" element={<PageNotFound />} />
+          </Routes>
+          <Footer />
+        </CurrentUserContext.Provider>
+      </AppContext.Provider>
     </div>
   );
 }

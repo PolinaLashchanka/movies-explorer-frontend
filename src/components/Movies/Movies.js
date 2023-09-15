@@ -1,14 +1,17 @@
 import "./Movies.css";
+import { AppContext } from "../../context/AppContext";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
-function Movies({ searchedMovies, searchMovies, addMoreMovies, count, isLoading, noMoviesMessage, saveMovie, savedMovies, deleteMovie }) {
+function Movies({ searchedMovies, searchMovies, addMoreMovies, count, noMoviesMessage, saveMovie, savedMovies, deleteMovie }) {
   const [searchWord, setSearchWord] = useState("");
   const [visibleMovies, setVisibleMovies] = useState([]);
   const [short, setShort] = useState(false);
   const [className, setClassName] = useState("");
+
+  const isLoading = useContext(AppContext);
 
   useEffect(() => {
     setSearchWord(JSON.parse(localStorage.getItem("searchWord")) ?? "");

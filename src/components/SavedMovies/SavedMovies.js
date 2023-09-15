@@ -1,5 +1,6 @@
 import "./SavedMovies.css";
-import { useState } from "react";
+import { AppContext } from "../../context/AppContext";
+import { useState, useContext } from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
@@ -7,10 +8,12 @@ import Preloader from "../Preloader/Preloader";
 function SavedMovies({
   visibleSavedMovies,
   searchSavedMovies,
-  isLoading,
   noSavedMoviesMessage,
   deleteMovie,
 }) {
+
+  const isLoading = useContext(AppContext);
+
   const [savedShort, setSavedShort] = useState(false);
   const [searchWordSaved, setSearchWordSaved] = useState("");
   const [classNameSaved, setClassNameSaved] = useState("");

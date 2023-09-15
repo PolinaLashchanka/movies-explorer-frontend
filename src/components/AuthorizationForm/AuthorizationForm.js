@@ -1,7 +1,8 @@
+import { AppContext } from "../../context/AppContext";
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import "./AuthorizationForm.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useValidationError } from "../../hooks/useValidationError";
 
 function AuthorizationForm({
@@ -22,6 +23,8 @@ function AuthorizationForm({
   const [isEmailDirty, setIsEmailDirty] = useState(false);
   const [isPasswordDirty, setIsPasswordDirty] = useState(false);
 
+  const isLoading = useContext(AppContext);
+
   const {
     hidden,
     handleNameErrorMessage,
@@ -35,8 +38,8 @@ function AuthorizationForm({
   } = useValidationError(path);
 
   useEffect(() => {
-    setServerError('');
-  }, [])
+    setServerError("");
+  }, []);
 
   return (
     <form className="form" noValidate onSubmit={handleSubmit}>
@@ -65,6 +68,7 @@ function AuthorizationForm({
             setServerError("");
           }}
           value={name}
+          disabled={isLoading}
           required
         />
         <span
@@ -91,6 +95,7 @@ function AuthorizationForm({
             setServerError("");
           }}
           value={email}
+          disabled={isLoading}
           required
         />
         <span
@@ -115,6 +120,7 @@ function AuthorizationForm({
             setServerError("");
           }}
           value={password}
+          disabled={isLoading}
           required
         />
         <span
@@ -128,18 +134,15 @@ function AuthorizationForm({
         <h2 className="server-error">{serverError ? serverError : ""}</h2>
         <button
           type="submit"
-          disabled={!formValid}
+          disabled={isLoading || !formValid}
           className="button form__button"
         >
-          {buttonName}
+          {buttonName + (isLoading ? "..." : "")}
         </button>
         <p className="form__text">
           {formText}
           <span>
-            <Link
-              to={path}
-              className="form__link link"
-            >
+            <Link to={path} className="form__link link">
               {linkText}
             </Link>
           </span>

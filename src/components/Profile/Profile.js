@@ -1,12 +1,20 @@
-import React from "react";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
-import { useState, useEffect } from "react";
+import { AppContext } from "../../context/AppContext";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useValidationError } from "../../hooks/useValidationError";
 import "./Profile.css";
 
-function Profile({ onSignOut, path, onHandleProfileChange, editProfile, edit, editMessage }) {
-  const currentUser = React.useContext(CurrentUserContext);
+function Profile({
+  onSignOut,
+  path,
+  onHandleProfileChange,
+  editProfile,
+  edit,
+  editMessage,
+}) {
+  const currentUser = useContext(CurrentUserContext);
+  const isLoading = useContext(AppContext);
   const [nameValue, setNameValue] = useState(currentUser.name);
   const [emailValue, setEmailValue] = useState(currentUser.email);
   const [disabledButton, setDisabledBitton] = useState(true);
@@ -31,10 +39,14 @@ function Profile({ onSignOut, path, onHandleProfileChange, editProfile, edit, ed
   };
 
   useEffect(() => {
-    nameValue === currentUser.name && emailValue === currentUser.email
+    (nameValue === currentUser.name && emailValue === currentUser.email) ||
+    errorNameValue !== "" ||
+    errorEmailValue !== ""
       ? setDisabledBitton(true)
       : setDisabledBitton(false);
   }, [nameValue, emailValue, currentUser.name, currentUser.email]);
+
+  console.log(errorNameValue);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -48,7 +60,9 @@ function Profile({ onSignOut, path, onHandleProfileChange, editProfile, edit, ed
       <form className="profile__form" onSubmit={handleSubmit}>
         <input
           id="edit-name"
-          className={`profile__form-input ${errorNameValue && "form__input_red"}`}
+          className={`profile__form-input ${
+            errorNameValue && "form__input_red"
+          }`}
           type="text"
           value={nameValue}
           onChange={handleNameChange}
@@ -66,7 +80,9 @@ function Profile({ onSignOut, path, onHandleProfileChange, editProfile, edit, ed
         </span>
         <input
           id="edit-email"
-          className={`profile__form-input ${errorEmailValue && "form__input_red"}`}
+          className={`profile__form-input ${
+            errorEmailValue && "form__input_red"
+          }`}
           type="text"
           value={emailValue}
           onChange={handleEmailChange}
@@ -105,7 +121,7 @@ function Profile({ onSignOut, path, onHandleProfileChange, editProfile, edit, ed
             className="button profile__save-button"
             disabled={disabledButton}
           >
-            Сохранить
+            {"Сохранить" + (isLoading ? "..." : "")}
           </button>
         )}
       </form>
