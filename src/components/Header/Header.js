@@ -24,9 +24,9 @@ function Header({ loggedIn, setEdit, setEditMessage, getAllSavedMovies }) {
   };
 
   return (
-    <>
+    <header className={`header ${path === "/" && "header_main"}`}>
       {path === "/" && !loggedIn && (
-        <header className="header header_main">
+        <div className="header__container container">
           {logoLink}
           <div className="header__link-container">
             <Link to="/signup" replace className="header__link link">
@@ -40,10 +40,10 @@ function Header({ loggedIn, setEdit, setEditMessage, getAllSavedMovies }) {
               Войти
             </Link>
           </div>
-        </header>
+        </div>
       )}
       {loggedIn && (
-        <header className={`header ${path === "/" && "header_main"}`}>
+        <div className="header__container container">
           {logoLink}
           <div className={`header__burger-overlay ${active}`}></div>
           <div
@@ -101,12 +101,12 @@ function Header({ loggedIn, setEdit, setEditMessage, getAllSavedMovies }) {
               <AiOutlineMenu size={29} />
             )}
           </div>
-        </header>
+        </div>
       )}
       {(path === "/signup" || path === "/signin") && (
-        <header className="header"></header>
+        <div className="header__container container"></div>
       )}
-    </>
+    </header>
   );
 }
 

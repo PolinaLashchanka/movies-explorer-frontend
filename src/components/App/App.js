@@ -246,7 +246,7 @@ function App() {
   }, [loggedIn]);
 
   return (
-    <div className="page">
+    <div className={`page ${path !== '/' && 'page__max-width'}`}>
       <CurrentUserContext.Provider value={currentUser}>
         <Header
           loggedIn={loggedIn}
@@ -274,7 +274,6 @@ function App() {
               />
             }
           />
-
           <Route
             path="/saved-movies"
             element={

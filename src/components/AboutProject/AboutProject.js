@@ -3,7 +3,7 @@ import SectionHeader from "../SectionHeader/SectionHeader";
 
 function AboutProject() {
   return (
-    <section className="about" id="about-project">
+    <section className="about container" id="about-project">
       <SectionHeader header="О проекте" />
       <div className="about__grid-text grid">
         <h3 className="grid__header">Дипломный проект включал 5 этапов</h3>

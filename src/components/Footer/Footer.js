@@ -8,7 +8,7 @@ function Footer() {
   return (
     <>
       {(path === "/" || path === "/movies" || path === "/saved-movies") && (
-        <footer className="footer">
+        <footer className="footer container">
           <h2 className="footer__header">
             Учебный проект Яндекс.Практикум х BeatFilm.
           </h2>

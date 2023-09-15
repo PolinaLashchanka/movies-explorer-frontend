@@ -1,6 +1,9 @@
 import checkResponse from "./checkResponse";
 
-const BASE_URL = "https://api.films-search.students.nomoreparties.co";
+// const BASE_URL = "https://api.films-search.students.nomoreparties.co";
+
+const BASE_URL = "http://localhost:3000";
+
 
 function request(url, options) {
   return fetch(url, options).then(checkResponse);

@@ -1,4 +1,8 @@
 .header {
+    width: 100%;
+}
+
+.header__container {
     display: flex;
     justify-content: space-between;
     padding: 0 70px;
@@ -99,7 +103,7 @@
 
 
 @media (max-width: 768px) {
-    .header {
+    .header__container {
         padding: 0 30px;
     }
 
@@ -187,7 +191,7 @@
 }
 
 @media (max-width: 320px) {
-    .header {
+    .header__container {
         padding: 0 14px;
     }
 
